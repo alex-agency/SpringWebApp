@@ -7,9 +7,9 @@ import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 
-public class MongoDBFactory {
+public final class MongoDBFactory {
 
-	protected static Logger logger = Logger.getLogger("mongo");
+	private static Logger logger = Logger.getLogger(MongoDBFactory.class);
 	private static final String HOST_NAME = "localhost";
 	private static final int HOST_PORT = 27017;
 	
