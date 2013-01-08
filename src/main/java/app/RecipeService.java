@@ -16,29 +16,22 @@ import com.mongodb.DBObject;
 @Service("recipeService")
 @Transactional
 public class RecipeService {
-	
 	private static Logger logger = Logger.getLogger(RecipeService.class);
-	private String database = "mydb";
-	private String collection = "recipes";
 	
-	public RecipeService() {
-	}
+	private static final String COLLECTION = "recipes";
 	
 	public boolean create(Recipe recipe) {
 		logger.debug("Adding a new recipe");
 		
 		try {
 			// Create a new db object
-			BasicDBObject doc = new BasicDBObject();
-			// Generate random id using UUID type 4
-	        doc.put("id", UUID.randomUUID().toString()); 
-	        doc.put("title", recipe.getTitle());
-	        doc.put("category", recipe.getCategory());
-	        doc.put("ingredients", recipe.getIngredients());
-	        doc.put("recipe", recipe.getRecipe());
-	        
+			BasicDBObject doc = new BasicDBObject(recipe.getMap());
+			
+			DB db = MongoDBClient.INSTANCE.getDB(DBNAME, username, password)
+			
+			
 	        // Retrieve collection. If not existing, create a new one
-	     	DBCollection coll = MongoDBFactory.getCollection(database, collection);
+	     	DBCollection coll = MongoDBClient.INSTANCE.getCollection(null, COLLECTION);
 	        // Save new recipe
 	        coll.insert(doc);
 	        
@@ -54,7 +47,7 @@ public class RecipeService {
 		
 		DBObject dbObject = new BasicDBObject("id", id);
 		// Retrieve collection
-		DBCollection coll = MongoDBFactory.getCollection(database, collection);
+		DBCollection coll = MongoDBClient.getCollection(database, collection);
 		// Find and return the recipe with the given id
         DBObject doc = coll.findOne(dbObject);
         

@@ -1,43 +1,24 @@
 package app;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Recipe {
 	
-	private String id;
-	private String title;
-	private String category;
-	private List ingredients;
-	private String recipe;
+	private Map<String, Object> recipe = new HashMap<String, Object>();	
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public List getIngredients() {
-		return ingredients;
-	}
-	public void setIngredients(List ingredients) {
-		this.ingredients = ingredients;
-	}
-	public String getRecipe() {
+	public static final String ID = new String("id");
+	public static final String TITLE = new String("title");
+	public static final String CATEGORY = new String("category");
+	public static final String INGREDIENTS = new String("ingredients");
+	public static final String RECIPE = new String("recipe");
+	
+	
+	public Map<String, Object> getMap() {
 		return recipe;
 	}
-	public void setRecipe(String recipe) {
+	
+	public void setMap(Map<String, Object> recipe) {
 		this.recipe = recipe;
 	}
 }
