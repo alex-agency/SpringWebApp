@@ -1,20 +1,20 @@
 package app;
 
-import java.net.UnknownHostException;
+/*import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
+import com.mongodb.MongoException;*/
 
 public class MongoDBClient {
-	private static Logger logger = Logger.getLogger(MongoDBClient.class);
+/*	private static Logger logger = Logger.getLogger(MongoDBClient.class);
 	
 	private MongoClient mongoClient;
 	
-	/**
+	*//**
 	 * Constants
-	 */
+	 *//*
 	private static final String HOST_NAME = "localhost";
 	private static final int HOST_PORT = 27017;
 	private static final String DB_NAME = "mydb";
@@ -33,9 +33,9 @@ public class MongoDBClient {
 		}
 	}
 	
-	/**
+	*//**
 	 * Retrieve a db
-	 */
+	 *//*
 	public DB getDB(String dbname, String username, String password) {
 		logger.debug("Retrieving db: " + dbname);
 		
@@ -51,9 +51,9 @@ public class MongoDBClient {
 		return db;
 	}
 	
-	/**
+	*//**
 	 * Retrieve a collection
-	 */
+	 *//*
 	public DBCollection getCollection(String collection) {
 		logger.debug("Retrieving collection: " + collection);
 		
@@ -67,5 +67,5 @@ public class MongoDBClient {
 		
 		return col;
 	}
-	
+	*/
 }

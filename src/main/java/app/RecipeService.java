@@ -1,5 +1,6 @@
 package app;
 
+/*import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,18 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;*/
 
-@Service("recipeService")
-@Transactional
+//@Service("recipeService")
+//@Transactional
 public class RecipeService {
-	private static Logger logger = Logger.getLogger(RecipeService.class);
+/*	private static Logger logger = Logger.getLogger(RecipeService.class);
 	
 	private static final String COLLECTION = "recipes";
 	
-	/**
+	*//**
 	 * GRUD methods
-	 */
+	 *//*
 	
 	public boolean create(Recipe recipe) {
 		logger.debug("Adding a new recipe");
@@ -105,22 +107,34 @@ public class RecipeService {
 		}
 	}
 	
-	/**
-	 * 
-	 */
+	*//**
+	 * Retrieving all recipes
+	 *//*
 	public List<Recipe> readAll() {
-		logger.debug("Retrieving all recipe");
+		logger.debug("Retrieving all recipes");
 		
+		List<Recipe> recipes = new ArrayList<Recipe>();
 		try {
-			
-			
-			
+			DBCollection coll = new MongoDBClient().getCollection(COLLECTION);
+			// Retrieve all documents from collection
+			DBCursor cursor = coll.find();
+	        for (DBObject doc : cursor) {
+	        	Recipe recipe = new Recipe();
+				// Read document and store to recipe
+				for (String key: doc.keySet()) {
+					Object value = doc.get(key);
+					recipe.setProperty(key, value);
+				}
+	        	// Add recipe to list
+				recipes.add(recipe);
+	        }
+	        cursor.close();
 			
 		} catch (Exception e) {
 			logger.error(e);
 		}
 		
-		return null;
-	}
+		return recipes;
+	}*/
 	
 }

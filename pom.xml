@@ -9,11 +9,13 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+  	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <junit.version>[4.11,)</junit.version>
       <log4j.version>[1.2,)</log4j.version>
       <jdk.version>1.6</jdk.version>
       <mongodb.version>[2.2,)</mongodb.version>
       <spring.version>3.2.0.RELEASE</spring.version>
+      <spring.mongodb.version>1.0.3.RELEASE</spring.mongodb.version> 
   </properties>
 
   <dependencies>
@@ -23,6 +25,13 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+      <scope>test</scope>
+    </dependency>
 
     <dependency>
       <groupId>log4j</groupId>
@@ -30,16 +39,29 @@
       <version>${log4j.version}</version>
     </dependency>
 
+	<!-- native java driver will be deleted in future 
     <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongo-java-driver</artifactId>
       <version>${mongodb.version}</version>
-    </dependency>
+    </dependency-->
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-mongodb</artifactId>
+      <version>${spring.mongodb.version}</version>
     </dependency>
 
     <dependency>
@@ -54,11 +76,12 @@
       <version>${spring.version}</version>
     </dependency>
 
+	<!-- Will be deleted in future 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
       <version>${spring.version}</version>
-    </dependency>
+    </dependency-->
 
   </dependencies>
   <build>
