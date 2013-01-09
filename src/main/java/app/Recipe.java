@@ -21,4 +21,12 @@ public class Recipe {
 	public void setMap(Map<String, Object> recipe) {
 		this.recipe = recipe;
 	}
+
+	public void setProperty(String key, Object value) {
+		recipe.put(key, value);
+	}
+
+	public Object getProperty(String key) {
+		return recipe.get(key);
+	}
 }

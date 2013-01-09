@@ -4,7 +4,6 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
@@ -21,13 +20,8 @@ public class MongoDBClient {
 	private static final String DB_NAME = "mydb";
 	private static final String DB_USER = "";
 	private static final String DB_PASSWORD = "";
-
-	/**
-	 * Singleton
-	 */
-	public static final MongoDBClient INSTANCE = new MongoDBClient();
-	// private constructor
-	private MongoDBClient() {
+	
+	public MongoDBClient() {
 		logger.debug("Making connection to MongoDB database");
 		
 		try {
@@ -65,11 +59,13 @@ public class MongoDBClient {
 		
 		DBCollection col = null;
 		try {
-			
-			
+			DB db = this.getDB(DB_NAME, DB_USER, DB_PASSWORD);
+			col = db.getCollection(collection);
+		} catch (MongoException e) {
+			logger.error(e);
 		}
 		
-		return db.getCollection(collection);
+		return col;
 	}
 	
 }
