@@ -1,9 +1,9 @@
-package app.mongo.domain;
+package app.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "ingredients")
+@Document
 public final class Ingredient {
 	
 	@Id
@@ -13,7 +13,7 @@ public final class Ingredient {
 	public Ingredient(String name) {
 		this.name = name;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

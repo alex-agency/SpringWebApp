@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import app.mongo.domain.Ingredient;
+import app.domain.Ingredient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/webapp/WEB-INF/spring-mongodb-context.xml")

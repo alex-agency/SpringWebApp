@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import app.mongo.domain.Ingredient;
-import app.mongo.domain.Recipe;
+import app.domain.Ingredient;
+import app.domain.Recipe;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/webapp/WEB-INF/spring-mongodb-context.xml")
