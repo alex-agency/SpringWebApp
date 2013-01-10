@@ -13,9 +13,9 @@
 
    	<mongo:db-factory host="localhost"
                   	  port="27017"
-                  	  dbname="recipes_db"
-                      username=""
-                      password=""/>
+                  	  dbname="recipes_db"/>
+                      <!-- username=""
+                      password=""/-->
    	<mongo:repositories base-package="app.mongo.repository"/>
     
    	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">

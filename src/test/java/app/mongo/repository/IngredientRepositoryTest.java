@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import app.domain.Ingredient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/webapp/WEB-INF/spring-mongodb-context.xml")
+@ContextConfiguration("/mongo-repositories-context.xml")
 public class IngredientRepositoryTest {
 	
 	@Autowired
@@ -24,7 +24,7 @@ public class IngredientRepositoryTest {
     }
     
     @Test
-    public void testFindByTitle() {
+    public void testFindByName() {
     	Ingredient ingredient1 = new Ingredient("Ingredient1");
     	Ingredient ingredient2 = new Ingredient("Ingredient2");
         

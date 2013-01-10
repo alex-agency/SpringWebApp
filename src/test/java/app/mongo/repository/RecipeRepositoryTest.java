@@ -15,7 +15,7 @@ import app.domain.Ingredient;
 import app.domain.Recipe;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/webapp/WEB-INF/spring-mongodb-context.xml")
+@ContextConfiguration("/mongo-repositories-context.xml")
 public class RecipeRepositoryTest {
     
 	@Autowired
@@ -62,7 +62,7 @@ public class RecipeRepositoryTest {
     }
     
     @Test
-    public void testFindByName() {
+    public void testFindByTitle() {
         Recipe recipe1 = new Recipe();
         recipe1.setTitle("Recipe1");
         
