@@ -7,70 +7,51 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import app.domain.Recipe;
+import app.mongo.repository.IngredientRepository;
 import app.mongo.repository.RecipeRepository;
 
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
-	private static Logger logger = Logger.getLogger(RecipeController.class);
+	protected static Logger logger = Logger.getLogger(RecipeController.class);
 	
 	@Resource(name="recipeRepository")
 	private RecipeRepository recipeRepository;
 	
-	@RequestMapping(value="/get")
-	public @ResponseBody Recipe get(@RequestBody Recipe recipe) {
-		return recipeRepository.findOne(recipe.getId());
-	}
-	
-	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public @ResponseBody Recipe create(
-			@RequestParam String username,
-			@RequestParam String password,
-			@RequestParam String firstName,
-			@RequestParam String lastName,
-			@RequestParam Integer role) {
-
-		Role newRole = new Role();
-		newRole.setRole(role);
-
-		User newUser = new User();
-		newUser.setUsername(username);
-		newUser.setPassword(password);
-		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
-		newUser.setRole(newRole);
-
-		return service.create(newUser);
-	}
-	
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String getAllRecipes(ModelMap model) {
-		logger.debug("Received request to show all recipe");
-		
-		//List<Recipe> recipes = recipeService.readAll();
-		
-		//model.addAttribute(recipes);
-		
-		return "recipes";
-	}
-	
+	@Resource(name="ingredientRepository")
+	private IngredientRepository ingredientRepository;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addRecipe(ModelMap model) {
-		logger.debug("Received request to show add page");
-		
-		//model.addAttribute("recipe", new Recipe());
-		
-		return "addrecipe";
+    public String getAddPage() {
+		logger.debug("Received request to show add page.");
+      
+     	// This will resolve to /WEB-INF/jsp/add-recipe.jsp
+     	return "add-recipe";
 	}
-
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+    public @ResponseBody Recipe add(@RequestBody Recipe recipe) {
+		logger.debug("Received request to save recipe");
+		
+		// We must save both separately since there is no cascading feature
+		// in Spring Data MongoDB (for now)
+		ingredientRepository.save(recipe.getIngredients());
+		return recipeRepository.save(recipe);
+	}
+	
+	@RequestMapping
+	public @ResponseBody List<Recipe> getAll() {
+		return recipeRepository.findAll();
+	}
+	
+	@RequestMapping
+	public @ResponseBody Recipe get(@RequestBody Recipe recipe) {		
+		return recipeRepository.findOne(recipe.getId());
+	}
 }

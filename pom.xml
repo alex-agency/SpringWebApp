@@ -27,6 +27,10 @@
       <scope>test</scope>
     </dependency>
     
+    <!--  
+        Support for testing Spring applications with tools such as JUnit and TestNG  
+        This artifact is generally always defined with a 'test' scope for the integration testing framework and unit testing stubs  
+    --> 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
@@ -47,17 +51,26 @@
       <version>${mongodb.version}</version>
     </dependency-->
 
-    <!-- dependency>
+	<!--  
+        Core utilities used by other modules.  
+        Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)  
+    -->  
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>${spring.version}</version>
-    </dependency-->
-    
+    </dependency>
+
+    <!--  
+        Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)  
+        This is the central artifact for Spring's Dependency Injection Container and is generally always defined  
+    --> 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    
     
     <dependency>
       <groupId>org.springframework.data</groupId>
@@ -65,12 +78,21 @@
       <version>${spring.mongodb.version}</version>
     </dependency>
 
-    <!-- dependency>
+	<!--  
+        Web application development utilities applicable to both Servlet and Portlet Environments  
+        (depends on spring-core, spring-beans, spring-context)  
+        Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework with Spring (org.springframework.web.*)  
+    --> 
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
+	<!--  
+        Spring MVC for Servlet Environments (depends on spring-core, spring-beans, spring-context, spring-web)  
+        Define this if you use Spring MVC with a Servlet Container
+    -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
