@@ -84,4 +84,24 @@ public class Recipe {
 			return false;
 		return true;
 	}
+
+	public void setId(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Ingredient> getIngredients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setCategory(Object category2) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -52,4 +52,9 @@ public final class Ingredient {
 			return false;
 		return true;
 	}
+
+	public void setId(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
