@@ -1,33 +1,53 @@
 package app.controller;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import app.domain.Recipe;
-import app.mongo.repository.IngredientRepository;
-import app.mongo.repository.RecipeRepository;
 
 @Controller
-@RequestMapping("/recipes")
+//@RequestMapping("/recipe")
+@SessionAttributes
 public class RecipeController {
-	protected static Logger logger = Logger.getLogger(RecipeController.class);
+	//protected static Logger logger = Logger.getLogger(RecipeController.class);
 	
-	@Resource(name="recipeRepository")
-	private RecipeRepository recipeRepository;
+	//@Resource(name="recipeRepository")
+	//private RecipeRepository recipeRepository;
 	
-	@Resource(name="ingredientRepository")
-	private IngredientRepository ingredientRepository;
+	//@Resource(name="ingredientRepository")
+	//private IngredientRepository ingredientRepository;
 	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	// Invoked on every request
+	//@ModelAttribute
+	//public void ajaxAttribute(WebRequest request, Model model) {
+	//	model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
+	//}
+	
+    @RequestMapping(value = "/addRecipe", method = RequestMethod.POST)
+    public String addRecipe(@ModelAttribute("recipe")
+                            Recipe recipe, BindingResult result) {
+         
+        System.out.println("Title:" + recipe.getTitle() + 
+                    "Category:" + recipe.getCategory());
+         
+        return "redirect:recipes.html";
+    }
+     
+    @RequestMapping("/recipes")
+    public ModelAndView showRecipes() {
+         
+        return new ModelAndView("recipe", "command", new Recipe());
+    }
+	
+	
+    
+/*	@RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAddPage() {
 		logger.debug("Received request to show add page.");
       
@@ -53,5 +73,5 @@ public class RecipeController {
 	@RequestMapping
 	public @ResponseBody Recipe get(@RequestBody Recipe recipe) {		
 		return recipeRepository.findOne(recipe.getId());
-	}
+	}*/
 }

@@ -13,13 +13,21 @@ public final class Ingredient {
 	public Ingredient(String name) {
 		this.name = name;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -52,9 +60,12 @@ public final class Ingredient {
 			return false;
 		return true;
 	}
-
-	public void setId(String string) {
-		// TODO Auto-generated method stub
-		
+	
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("..toString..");
+        
+        return sb.toString();
 	}
+	
 }
