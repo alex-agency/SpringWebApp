@@ -1,0 +1,126 @@
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+
+h1 {
+	font-size: 26px;
+	font-weight: normal;
+}
+
+
+.header {
+	display: block;
+	margin: 20px;
+	padding-top: 10px;
+}
+
+	/*.logo {
+    	background-image: url('');
+		background-repeat: no-repeat;
+		width: 182px;
+		height: 29px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 10px;
+	}*/
+        
+	.title {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0;
+	}
+	
+	.form-search {
+		display: inline-block;
+		vertical-align: middle;
+		float: right;
+	}
+
+	.nav.main {
+		background-image: url('');
+		padding: 0;
+		margin: 15px 0 0 0;
+	}
+
+		.nav.main li {
+			display: inline-block;
+			padding: 9px 0 9px 0;
+		}
+                
+			.nav.main li a {
+				padding: 10px 20px;
+				font-weight: bold;
+				color: #eee;
+				font-size: 15px;
+			}
+                
+			.nav.main li a:hover {
+ 				background-image: url('');
+				color: white;
+			}
+                
+			.nav.main .configure {
+				float: right;
+			}
+
+	.content {
+		background-image: url('');
+		min-width: 800px;
+	}
+
+        .content .header {
+                background-color: #eee;
+                padding: 0;
+                margin: 0;
+        }
+        
+                .content .header .title {
+                        display: inline-block;
+                        vertical-align: middle;
+                }
+        
+                .content .header .buttons {
+                        display: inline-block;
+                        vertical-align: middle;
+                        float: right;
+                }
+                
+                        .content.edit {
+                        }
+                        
+                        .content.delete {
+                        }
+
+
+
+.content li {
+	display: inline-block;
+}
+
+.footer {
+        background-color: #eee;
+        height: 40px;
+        margin: 20px;
+}
+
+        .footer .copyright {
+                display: inline-block;
+                vertical-align: top;
+                margin: 10px 0 0 30px;
+                color: gray;
+        }
+        
+        .footer .links {
+                display: inline-block;
+                vertical-align: top;
+                float: right;
+                padding: 0;
+                margin: 8px 0 0 30px;
+        }
+        
+        .footer .links li {
+                display: inline-block;
+        }
