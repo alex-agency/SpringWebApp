@@ -1,34 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Cook Book</title>
-	
-	<link rel="stylesheet"  type="text/css" media="screen" href="bootstrap.css" />
-	<link rel="stylesheet"  type="text/css" media="screen" href="bootstrap-responsive.css" />
-	<link rel="stylesheet"  type="text/css" media="screen" href="style.css" />
+  <head>
+    <meta charset="utf-8">
+    <title>Cook Book</title>
+    <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link href="bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+	<!--link rel="stylesheet"  type="text/css" media="screen" href="style.css" /-->
 	<script src="holder.js"></script>
-	<script src="bootstrap.js"></script>
+	<!--script src="bootstrap.js"></script-->
 </head>
+
 <body>
-	<div class="navbar">
-		<div class="navbar"> 
-		<!--a class="logo" href="#" title="Company"></a-->
-		
-		<h1 class="pull-left">Cook Book</h2>
-		
-		<div class="form-search pull-right">
-			<input type="text" class="input-medium search-query">
-  			<button type="submit" class="btn">Search</button>
-		</div>
-		</div>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="navbar-inner">
-		<ul class="nav nav-pills">
-  			<li class="active"><a href="#">All</a></li>
-			<li><a href="#">Main dishes</a></li>
-			<li class="configure"><a href="#">Configure</a></li>
-		</ul>
+			<div class="container-fluid">
+				<div class="">
+					<!--a class="logo" href="#" title="Company"></a-->
+				
+					<h2 class="pull-left">Cook Book</h2>
+				</div>
+			</div>
 		</div>
+	</nav>
+	
+	<div class="container-fluid">
+	
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#">All Recipes</a>
+				
+				<ul class="nav nav-pills pull-left data-toggle="collapse" data-target=".nav-collapse"">
+					<li class="divider-vertical"></li>
+		  			<li class="active"><a href="#">All</a></li>
+		  			<li class="divider-vertical"></li>
+					<li><a href="#">Main dishes</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">Main dishes2</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">Main dishes3</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">Main dishes4</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">Main dishes5</a></li>
+					<li class="divider-vertical"></li>
+				</ul>
+									
+				<div class="navbar-search pull-right">
+					<input type="text" class="search-query" placeholder="Search">
+				</div>
+			</div>
+		</div>
+		
+<div class="row-fluid">
+			<ul class="thumbnails">
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+        		<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
+			</ul>
+		</div>
+
 	</div>
+
+	<div class="container-fluid">
+	
+		
+	
+	</div>
+		
+	<!--	
 	
 	<div class="container">
 		<div class="row navbar-inner">
@@ -42,7 +109,7 @@
 
 		</div>
 			
-			<div class="row show-grid">
+			<div class="row">
 				<div class="row-fluid">
 					<ul class="thumbnails">
         				<li><a class="thumbnail" href="#"><img src="holder.js/140x140"></a></li>
@@ -70,6 +137,8 @@
 		<ul class="links">
 			<li><a href="#">Info</a></li>
 		</ul>
-	</div>
+	</div> 
+	
+	-->
 </body>
 </html>
