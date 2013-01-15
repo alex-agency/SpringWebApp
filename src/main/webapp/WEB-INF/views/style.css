@@ -1,4 +1,26 @@
 
+/* Add top padding for navbar-top-fixed */
+body {
+	padding-top: 40px;
+  	padding-bottom: 40px;
+}
+
+.affix {
+	position: fixed;
+    top: 0px;
+}
+
+
+
+/* Remove top padding when top navbar goes static in narrow viewports
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+
+/*
 body {
 	margin: 0;
 	padding: 0;
@@ -17,7 +39,7 @@ h1 {
 	padding-top: 10px;
 }
 
-	/*.logo {
+	logo {
     	background-image: url('');
 		background-repeat: no-repeat;
 		width: 182px;
@@ -25,7 +47,7 @@ h1 {
 		display: inline-block;
 		vertical-align: middle;
 		margin-right: 10px;
-	}*/
+	}
         
 	.title {
 		display: inline-block;
@@ -124,3 +146,5 @@ h1 {
         .footer .links li {
                 display: inline-block;
         }
+
+*/
