@@ -1,190 +1,88 @@
 
-/* Add top padding for navbar-top-fixed */
 body {
 	padding-top: 40px;
   	padding-bottom: 40px;
 }
 
+header {
+	margin-bottom: 62px;
+}
 
-	
-	
-	header {
-		margin-bottom: 62px;
-		
+.affix-top {
+	margin-bottom: -42px !important;
+}
+
+.affix {
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.affix .navbar-inner {
+	z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
+	border-width: 0 0 1px; /* drop the border on the fixed edges */
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+	-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); /* IE6-9 */
+}
+
+.brand {
+  	display: none !important;
+}
+
+@media (min-width: 1870px) {
+
+	.affix .nav-collapse {
+		margin-left: 367px;
+		margin-right: 367px;
 	}
-	
-	.affix-top {
-		margin-bottom: -42px !important;
-	}
-	
-	.affix {
-		top: 0;
-		left: 0;
-		right: 0;
-	}
-	
-	.affix .navbar-inner {
-		z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
-		border-width: 0 0 1px; /* drop the border on the fixed edges */
-		-webkit-border-radius: 0;
-		-moz-border-radius: 0;
-		border-radius: 0;
-		-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-		-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-		box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); /* IE6-9 */
-	}
-	
-/* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
+}
+
 @media (min-width: 1280px) {
+
 	.affix .nav-collapse {
 		margin-left: 56px;
 		margin-right: 56px;
 	}
-
 }
 
-@media (min-width: 1210px) {
+@media (min-width: 980px) and (max-width: 1199px) {
 
-	/*.affix .nav {
-		width: 1168px; /* 2px less to account for left/right borders being removed when in fixed mode */
-}
-
-
-
-/* Remove top padding when top navbar goes static in narrow viewports
-@media (max-width: 979px) {
-  body {
-    padding-top: 0;
-  }
-}
-
-
-/*
-body {
-	margin: 0;
-	padding: 0;
-}
-
-
-h1 {
-	font-size: 26px;
-	font-weight: normal;
-}
-
-
-.header {
-	display: block;
-	margin: 20px;
-	padding-top: 10px;
-}
-
-	logo {
-    	background-image: url('');
-		background-repeat: no-repeat;
-		width: 182px;
-		height: 29px;
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 10px;
+	.thumbnails {
+		margin-left: 0 !important;
 	}
-        
-	.title {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 0;
-	}
+}
+
+
+@media (min-width: 768px) and (max-width: 979px) {
 	
-	.form-search {
+	.thumbnails {
+		margin-left: 8px !important;
+	}
+
+	.brand {
+		display: block !important;
+	}
+
+	.navbar-search {
+		float: none !important;
 		display: inline-block;
-		vertical-align: middle;
-		float: right;
+		margin-left: 20px;
+		width: 70%;
 	}
 
-	.nav.main {
-		background-image: url('');
-		padding: 0;
-		margin: 15px 0 0 0;
+	.navbar-search input {
+		width: 94%;
 	}
-
-		.nav.main li {
-			display: inline-block;
-			padding: 9px 0 9px 0;
-		}
-                
-			.nav.main li a {
-				padding: 10px 20px;
-				font-weight: bold;
-				color: #eee;
-				font-size: 15px;
-			}
-                
-			.nav.main li a:hover {
- 				background-image: url('');
-				color: white;
-			}
-                
-			.nav.main .configure {
-				float: right;
-			}
-
-	.content {
-		background-image: url('');
-		min-width: 800px;
-	}
-
-        .content .header {
-                background-color: #eee;
-                padding: 0;
-                margin: 0;
-        }
-        
-                .content .header .title {
-                        display: inline-block;
-                        vertical-align: middle;
-                }
-        
-                .content .header .buttons {
-                        display: inline-block;
-                        vertical-align: middle;
-                        float: right;
-                }
-                
-                        .content.edit {
-                        }
-                        
-                        .content.delete {
-                        }
-
-
-
-.content li {
-	display: inline-block;
 }
 
-.footer {
-        background-color: #eee;
-        height: 40px;
-        margin: 20px;
+@media (max-width: 767px) {
+
+	.navbar-search {
+		float: left !important;
+	}
 }
-
-        .footer .copyright {
-                display: inline-block;
-                vertical-align: top;
-                margin: 10px 0 0 30px;
-                color: gray;
-        }
-        
-        .footer .links {
-                display: inline-block;
-                vertical-align: top;
-                float: right;
-                padding: 0;
-                margin: 8px 0 0 30px;
-        }
-        
-        .footer .links li {
-                display: inline-block;
-        }
-
-*/
