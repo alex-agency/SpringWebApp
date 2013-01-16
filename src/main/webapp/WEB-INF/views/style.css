@@ -5,9 +5,49 @@ body {
   	padding-bottom: 40px;
 }
 
-.affix {
-	position: fixed;
-    top: 0px;
+
+	
+	
+	header {
+		margin-bottom: 62px;
+		
+	}
+	
+	.affix-top {
+		margin-bottom: -42px !important;
+	}
+	
+	.affix {
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+	
+	.affix .navbar-inner {
+		z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
+		border-width: 0 0 1px; /* drop the border on the fixed edges */
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+		-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+		box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); /* IE6-9 */
+	}
+	
+/* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
+@media (min-width: 1280px) {
+	.affix .nav-collapse {
+		margin-left: 56px;
+		margin-right: 56px;
+	}
+
+}
+
+@media (min-width: 1210px) {
+
+	/*.affix .nav {
+		width: 1168px; /* 2px less to account for left/right borders being removed when in fixed mode */
 }
 
 

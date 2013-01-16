@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,8 +31,7 @@
 
 </head>
 
-<body>
-
+<body data-spy="scroll" data-offset="300" data-target=".navbar">
 	<div class="container">
 		
 		<header>
@@ -46,9 +45,9 @@
 				</div>
 			</div>
 
-			<nav class="navbar" data-spy="affix" data-offset-top="100">
+			<nav class="navbar" data-spy="affix" data-offset-top="150">
 				<div class="navbar-inner">
-			      	
+
 			      	<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 	      			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 	        			<span class="icon-bar"></span>
@@ -57,11 +56,11 @@
 	      			</a>
 
 					<div class="nav-collapse">
-			        	<ul class="nav nav-pills">
+			        	<ul class="nav">
 			          		<li><a href="#category1">Main dishes</a></li>
 			          		<li><a href="#category2">Main dishes2</a></li>
 			        	</ul>
-			        	
+
 			        	<div class="navbar-search pull-right">
 							<input type="text" data-provide="typeahead" class="search-query" placeholder="Search">
 						</div>
@@ -75,9 +74,16 @@
 		<section id="category1">
 			<div class="page-header">
 				<h2>Main dishes</h2>
-				</div>
+			</div>
 
 			<ul class="thumbnails">
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
@@ -98,9 +104,16 @@
 		<section id="category2">
 			<div class="page-header">
 				<h2>Main dishes2</h2>
-				</div>
+			</div>
 
 			<ul class="thumbnails">
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
+				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
 				<li><a class="thumbnail" href="#"><img src="holder.js/160x160"></a></li>
@@ -124,10 +137,9 @@
 			<p class="pull-right"><a href="#">Back to top</a></p>
 	        
 	        <ul class="links">
-
 	        </ul>
-		
-			<h5 class="copyright">2013 (c)</h5>
+	        
+			<h5 class="copyright"></h5>
 		</footer>
 
 	</div><!-- /.container -->
@@ -136,7 +148,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-
 	<script src="bootstrap.js"></script>
 
 	<script src="holder.js"></script>
