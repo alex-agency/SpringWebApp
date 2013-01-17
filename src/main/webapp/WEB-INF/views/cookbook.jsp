@@ -1,3 +1,4 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +11,10 @@
 	<meta name="viewport" content="width=device-width">
 
 	<!-- Styles -->
-    <link href="style.css" rel="stylesheet">    
-	<link href="bootstrap.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet">    
+	<link href="/resources/css/bootstrap.css" rel="stylesheet">
 	<!--link href="http://bootswatch.com/amelia/bootstrap.css" rel="stylesheet"-->
-    <link href="bootstrap-responsive.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -124,13 +125,13 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="jquery.js"></script>
-	<script src="bootstrap.js"></script>
-	<script src="holder.js"></script>
-	<script src="script.js"></script>
+    <script src="/resources/js/jquery.js"></script>
+	<script src="/resources/js/bootstrap.js"></script>
+	<script src="/resources/js/holder.js"></script>
+	<script src="/resources/js/script.js"></script>
 	<!-- Modernizr for browser feature-checking 
 			+ HTML5shiv (included in modernizr) see modernizr.com -->
-  	<script src="modernizr.js"></script>
+  	<script src="/resources/js/modernizr.js"></script>
 
 </body>
 </html>

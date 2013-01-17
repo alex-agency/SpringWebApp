@@ -44,6 +44,12 @@ public class RecipeController {
          
         return new ModelAndView("recipe", "command", new Recipe());
     }
+    
+    @RequestMapping("/cookbook")
+    public ModelAndView showCookbook() {
+         
+        return new ModelAndView("cookbook", "command", new Recipe());
+    }
 	
 	
     
