@@ -16,7 +16,8 @@
       <jetty.version></jetty.version>
       <!-- mongodb.version>[2.2,)</mongodb.version-->
       <spring.version>3.2.0.RELEASE</spring.version>
-      <spring.mongodb.version>1.0.3.RELEASE</spring.mongodb.version> 
+      <spring.mongodb.version>1.0.3.RELEASE</spring.mongodb.version>
+      <sitemesh.version>[2.4,)</sitemesh.version>
   </properties>
 
   <dependencies>
@@ -105,6 +106,13 @@
       <artifactId>spring-tx</artifactId>
       <version>${spring.version}</version>
     </dependency-->
+    
+    <!-- Sitemesh -->
+	<dependency>
+	  <groupId>opensymphony</groupId>
+	  <artifactId>sitemesh</artifactId>
+	  <version>${sitemesh.version}</version>
+	</dependency>
 
   </dependencies>
   <build>
