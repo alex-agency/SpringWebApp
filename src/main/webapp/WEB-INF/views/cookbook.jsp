@@ -1,14 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:forEach var="category" items="${categories}">
-
-<section>
-	<div class="page-header">
-		<h2>"${category}"</h2>
-	</div>
-
-</section>
-
+	
+	<section id="${category.id}">
+		<div class="page-header">
+			<h2>${category.name}</h2>
+		</div>
+		
+		<ul class="thumbnails">
+			<c:forEach var="recipe" items="${category.recipes}">
+				
+				<li><a class="thumbnail" href="/recipe/${recipe.id}">${recipe}</a></li>
+			</c:forEach>
+		</ul>
+	</section>
 </c:forEach>
 
 <section id="category">

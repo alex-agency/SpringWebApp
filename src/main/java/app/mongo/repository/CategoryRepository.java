@@ -1,11 +1,11 @@
 package app.mongo.repository;
 
-import app.domain.Recipe;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.domain.Category;
+
 @Transactional
-public interface RecipeRepository extends MongoRepository<Recipe, String> {
+public interface CategoryRepository extends MongoRepository<Category, String> {
 	
 }

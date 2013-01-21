@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+
+import app.domain.Category;
 import app.domain.Recipe;
+import app.mongo.repository.CategoryRepository;
 import app.mongo.repository.IngredientRepository;
 import app.mongo.repository.RecipeRepository;
 import app.util.AjaxUtils;
@@ -21,15 +24,14 @@ import app.util.AjaxUtils;
 @RequestMapping
 public class RecipeController {
 	protected static Logger logger = Logger.getLogger(RecipeController.class);
-
+	
+	// Auto wired fields before create object
+	@Autowired
 	private RecipeRepository recipeRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
 	private IngredientRepository ingredientRepository;
-
-    @Autowired
-    public RecipeController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-        //this.ingredientRepository = recipeRepository.getIngredients();
-    }
 	
 	// Invoked on every request
 	@ModelAttribute
@@ -39,13 +41,11 @@ public class RecipeController {
 	
 	@RequestMapping("/")
     public String showCookbook(Model model) {
-		logger.debug("Received request to show cookbook page with all recipes.");
-		
-		List<String> categories = recipeRepository.findAllCategory();
+		logger.debug("Received request to show cookbook page with all categories and recipes.");
+		// get all categories which already has own recipes
+		List<Category> categories = categoryRepository.findAll();
+		// add list of categories to model of cookbook
 		model.addAttribute("categories", categories);
-		
-		List<Recipe> recipes = recipeRepository.findAll();
-		model.addAttribute("recipes", recipes);
 		
         return "cookbook";
     }
@@ -60,8 +60,11 @@ public class RecipeController {
 	@RequestMapping(value = "/recipe_edit", method = RequestMethod.POST)
     public String saveRecipe(Model model, Recipe recipe) {
 		logger.debug("Received request to save new recipe.");
-		
+		// save category
+		//categoryRepository.save(recipe.getCategory());
+		// save recipe
 		recipeRepository.save(recipe);
+		
         return "redirect:/";
     }
 
