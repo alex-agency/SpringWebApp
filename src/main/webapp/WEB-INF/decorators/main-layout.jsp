@@ -15,7 +15,7 @@
 	<!-- Styles -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" />
     <!-- United Theme from Bootswatch -->
-    <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" />    
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />    
   	<link href="<c:url value="/resources/css/bootstrap-responsive.min.css" />" rel="stylesheet" /> 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

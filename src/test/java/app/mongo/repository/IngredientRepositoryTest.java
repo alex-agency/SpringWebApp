@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import app.domain.Ingredient;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/mongo-repositories-context.xml")
+@ContextConfiguration("/WEB-INF/spring/app-servlet.xml")
 public class IngredientRepositoryTest {
 	
 	@Autowired

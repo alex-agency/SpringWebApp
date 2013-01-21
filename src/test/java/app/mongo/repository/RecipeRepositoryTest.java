@@ -15,7 +15,7 @@ import app.domain.Ingredient;
 import app.domain.Recipe;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/mongo-repositories-context.xml")
+@ContextConfiguration("/WEB-INF/spring/app-servlet.xml")
 public class RecipeRepositoryTest {
     
 	@Autowired
@@ -39,7 +39,7 @@ public class RecipeRepositoryTest {
         
         Recipe recipe1 = new Recipe();
         recipe1.setTitle("Recipe1");
-        recipe1.setIngredients(Arrays.asList(ingredient1, ingredient2));
+        //recipe1.setIngredients(Arrays.asList(ingredient1, ingredient2));
         
         Ingredient ingredient3 = new Ingredient("Ingredient3");
         Ingredient ingredient4 = new Ingredient("Ingredient4");
@@ -48,7 +48,7 @@ public class RecipeRepositoryTest {
         
         Recipe recipe2 = new Recipe();
         recipe2.setTitle("Recipe2");
-        recipe2.setIngredients(Arrays.asList(ingredient3, ingredient4));
+        //recipe2.setIngredients(Arrays.asList(ingredient3, ingredient4));
         
         recipeRepository.save(recipe1);
         recipeRepository.save(recipe2);

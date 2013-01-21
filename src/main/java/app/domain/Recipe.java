@@ -14,8 +14,8 @@ public class Recipe {
 	private String id;
 	private String title;
 	private String category;
-	@DBRef
-	private List<Ingredient> ingredients;
+	//@DBRef
+	//private List<Ingredient> ingredients;
 	private String recipe;
 	
 	
@@ -43,13 +43,13 @@ public class Recipe {
 		this.category = category;
 	}
 	
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
+	//public List<Ingredient> getIngredients() {
+	//	return ingredients;
+	//}
 	
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
+	//public void setIngredients(List<Ingredient> ingredients) {
+	//	this.ingredients = ingredients;
+	//}
 	
 	public String getRecipe() {
 		return recipe;
@@ -66,8 +66,8 @@ public class Recipe {
 		result = prime * result
 				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((ingredients == null) ? 0 : ingredients.hashCode());
+		//result = prime * result
+		//		+ ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -92,11 +92,11 @@ public class Recipe {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (ingredients == null) {
-			if (other.ingredients != null)
-				return false;
-		} else if (!ingredients.equals(other.ingredients))
-			return false;
+		//if (ingredients == null) {
+		//	if (other.ingredients != null)
+		//		return false;
+		//} else if (!ingredients.equals(other.ingredients))
+		//	return false;
 		if (recipe == null) {
 			if (other.recipe != null)
 				return false;
@@ -109,11 +109,11 @@ public class Recipe {
 			return false;
 		return true;
 	}
-	
+
+	@Override
 	public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("..toString..");
-        
-        return sb.toString();
+		return "Recipe [id=" + id + ", title=" + title + ", category="
+				+ category + ", recipe=" + recipe + "]";
 	}
+	
 }
