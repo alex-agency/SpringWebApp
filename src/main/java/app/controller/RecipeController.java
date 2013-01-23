@@ -47,36 +47,29 @@ public class RecipeController {
 		List<Category> categories = categoryRepository.findAll();
 		// add list of categories to model of cookbook
 		model.addAttribute("categories", categories);
-		
+		// show main page
         return "cookbook";
     }
 	
 	@RequestMapping(value = "/recipe_edit")
     public String createRecipe(Model model) {
-		logger.debug("Received request to show addrecipe page.");
-		
+		logger.debug("Received request to show a page for create new recipe.");
+		// show page for create recipe
         return "recipe_edit";
     }
 	
 	@RequestMapping(value = "/recipe_edit", method = RequestMethod.POST)
     public String saveRecipe(Model model, Recipe recipe, Category category) {
 		logger.debug("Received request to save new recipe.");
-		
 		// save recipe
 		recipeRepository.save(recipe);
-		
+		// put recipe to category
 		List<Recipe> recipes = category.getRecipes();
-		if(recipes == null)
-		{
-			recipes = new ArrayList<Recipe>();
-		}
-		
 		recipes.add(recipe);
 		category.setRecipes(recipes);
-		
 		// save category
 		categoryRepository.save(category);
-		
+		// redirect to main page
         return "redirect:/";
     }
 

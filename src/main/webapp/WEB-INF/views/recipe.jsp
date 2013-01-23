@@ -5,7 +5,7 @@
         <td><label>${recipe.title}</label></td>
     </tr>
     <tr>
-        <td><label>${recipe.category}</label></td>
+        <td><label>${category.name}</label></td>
     </tr>
     <tr>
         <td><label>${recipe.recipe}</label></td>
