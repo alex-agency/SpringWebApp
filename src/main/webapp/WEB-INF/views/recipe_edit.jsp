@@ -7,7 +7,7 @@
     </tr>
     <tr>
         <td><label>Category</label></td>
-        <td><input name="category" value="${recipe.category}" /></td>
+        <td><input name="category" value="${category.name}" /></td>
     </tr>
     <tr>
         <td><label>Recipe</label></td>

@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -58,12 +59,23 @@ public class RecipeController {
     }
 	
 	@RequestMapping(value = "/recipe_edit", method = RequestMethod.POST)
-    public String saveRecipe(Model model, Recipe recipe) {
+    public String saveRecipe(Model model, Recipe recipe, Category category) {
 		logger.debug("Received request to save new recipe.");
-		// save category
-		//categoryRepository.save(recipe.getCategory());
+		
 		// save recipe
 		recipeRepository.save(recipe);
+		
+		List<Recipe> recipes = category.getRecipes();
+		if(recipes == null)
+		{
+			recipes = new ArrayList<Recipe>();
+		}
+		
+		recipes.add(recipe);
+		category.setRecipes(recipes);
+		
+		// save category
+		categoryRepository.save(category);
 		
         return "redirect:/";
     }

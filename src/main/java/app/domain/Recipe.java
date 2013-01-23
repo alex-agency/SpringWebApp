@@ -13,10 +13,10 @@ public class Recipe {
 	@Id
 	private String id;
 	private String title;
-
-	private Category category;
-	@DBRef
-	private List<Ingredient> ingredients;
+	
+	//private String category;
+	//@DBRef
+	//private List<Ingredient> ingredients;
 	private String recipe;
 	
 	public String getId() {
@@ -35,21 +35,21 @@ public class Recipe {
 		this.title = title;
 	}
 	
-	public Category getCategory() {
-		return category;
-	}
+	//public String getCategory() {
+	//	return category;
+	//}
 	
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+	//public void setCategory(String category) {
+	//	this.category = category;
+	//}
 	
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
+	//public List<Ingredient> getIngredients() {
+	//	return ingredients;
+	//}
 	
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
+	//public void setIngredients(List<Ingredient> ingredients) {
+	//	this.ingredients = ingredients;
+	//}
 	
 	public String getRecipe() {
 		return recipe;
@@ -62,7 +62,7 @@ public class Recipe {
 	@Override
 	public String toString() {
 		return "Recipe [id=" + id + ", title=" + title + ", category="
-				+ category + ", ingredients=" + ingredients + ", recipe="
+				+ "category" + ", ingredients=" + "ingredients" + ", recipe="
 				+ recipe + "]";
 	}
 	

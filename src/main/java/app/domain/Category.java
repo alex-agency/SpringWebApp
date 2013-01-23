@@ -15,11 +15,10 @@ public class Category {
 	@DBRef
 	private List<Recipe> recipes;
 	
-	public Category(String name, List<Recipe> recipes) {
+	public Category(String name) {
 		this.name = name;
-		this.recipes = recipes;
 	}
-
+	
 	public String getId() {
 		return id;
 	}
