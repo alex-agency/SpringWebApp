@@ -2,7 +2,7 @@
 
 <c:forEach var="category" items="${categories}">
 	
-	<section id="${category.id}">
+	<section id="${category.name}">
 		<div class="page-header">
 			<h2>${category.name}</h2>
 		</div>

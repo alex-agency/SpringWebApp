@@ -8,4 +8,5 @@ import app.domain.Category;
 @Transactional
 public interface CategoryRepository extends MongoRepository<Category, String> {
 	
+	public Category findByName(String name);
 }

@@ -9,11 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "categories")
 public class Category {
 	
+	//@Id
 	private String id;
-	@Id
 	private String name;
 	@DBRef
 	private List<Recipe> recipes;
+	
+	public Category(String name) {
+		this.name = name;
+	}
 	
 	public String getId() {
 		return id;

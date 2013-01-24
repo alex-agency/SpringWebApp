@@ -51,44 +51,71 @@ public class RecipeController {
         return "cookbook";
     }
 	
-	@RequestMapping(value = "/recipe_edit")
+	@RequestMapping(value = "/add-recipe")
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
 		// show page for create recipe
-        return "recipe_edit";
+        return "recipe-modify";
     }
 	
-	@RequestMapping(value = "/recipe_edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
     public String saveRecipe(Model model, Recipe recipe, Category category) {
 		logger.debug("Received request to save new recipe.");
-		// save recipe
-		recipeRepository.save(recipe);
-		// put recipe to category
-		List<Recipe> recipes = category.getRecipes();
-		recipes.add(recipe);
-		category.setRecipes(recipes);
-		// save category
-		categoryRepository.save(category);
+		
+		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
+		if(existRecipe != null) {
+			existRecipe.setRecipe(recipe.getRecipe());
+			// update recipe
+			recipeRepository.save(existRecipe);
+		} else {
+			// save new recipe
+			recipeRepository.save(recipe);
+		}
+		
+		Category existCategory = categoryRepository.findByName(category.getName());
+		if(existCategory != null) {
+			
+			List<Recipe> recipes = existCategory.getRecipes();
+			if(recipes == null) {
+				recipes = new ArrayList<Recipe>();
+			}
+			recipes.add(recipe);
+			
+			existCategory.setRecipes(recipes);
+			// update category
+			categoryRepository.save(existCategory);
+		} else {
+			
+			List<Recipe> recipes = new ArrayList<Recipe>();
+			recipes.add(recipe);
+			
+			category.setRecipes(recipes);
+			// save new recipe
+			categoryRepository.save(category);
+		}
+		
 		// redirect to main page
         return "redirect:/";
     }
-
+	
 	@RequestMapping(value = "/recipe/{id}")
     public String showRecipe(@PathVariable("id") String id, Model model) {
-		logger.debug("");
-		
+		logger.debug("Recived request to find recipe and to show it on the page.");
+		// find recipe by id
 		Recipe recipe = recipeRepository.findOne(id);
+		// add recipe to model
 		model.addAttribute(recipe);
+		// show recipe
 		return "recipe";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit")
-	public String editRecipe(@PathVariable("id") String id, Model model) {
-		logger.debug("");
+	public String updateRecipe(@PathVariable("id") String id, Model model) {
+		logger.debug("Recived request");
 		
 		Recipe recipe = recipeRepository.findOne(id);
 		model.addAttribute(recipe);
-		return "recipe_edit";
+		return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "recipes")
 public class Recipe {
 	
-	@Id
+	//@Id
 	private String id;
 	private String title;
 	@DBRef
@@ -47,7 +47,7 @@ public class Recipe {
 	public void setRecipe(String recipe) {
 		this.recipe = recipe;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Recipe [id=" + id + ", title=" + title + ", ingredients="
