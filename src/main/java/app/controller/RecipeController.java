@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -63,14 +62,80 @@ public class RecipeController {
 		logger.debug("Received request to save new recipe.");
 		
 		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
-		if(existRecipe != null) {
+		
+		System.out.println(existRecipe);
+		
+		/*if(existRecipe != null) {
+			
 			existRecipe.setRecipe(recipe.getRecipe());
 			// update recipe
 			recipeRepository.save(existRecipe);
 		} else {
+			
+		recipeRepository.
+			
+			//categoryRepository.save(category);
+			
+			System.out.println(recipe);*/
+			
+			//System.out.println(category);
 			// save new recipe
-			recipeRepository.save(recipe);
-		}
+			//recipeRepository.save(recipe);
+		//}
+		
+		/*Category existCategory = categoryRepository.findByName(category.getName());
+		if(existCategory != null) {
+			
+			List<Recipe> recipes = existCategory.getRecipes();
+			if(recipes == null) {
+				recipes = new ArrayList<Recipe>();
+			}
+			recipes.add(recipe);
+			
+			existCategory.setRecipes(recipes);
+			// update category
+			categoryRepository.save(existCategory);
+		} else {
+			
+			List<Recipe> recipes = new ArrayList<Recipe>();
+			recipes.add(recipe);
+			
+			category.setRecipes(recipes);
+			// save new recipe
+			categoryRepository.save(category);
+		}*/
+		
+		// redirect to main page
+        return "redirect:/";
+    }
+	
+	@RequestMapping(value = "/recipe/{id}")
+    public String showRecipe(@PathVariable("id") String id, Model model) {
+		logger.debug("Recived request to find recipe and to show it on the page.");
+		// find recipe by id
+		Recipe recipe = recipeRepository.findOne(id);
+		// add recipe to model
+		model.addAttribute(recipe);
+		// show recipe
+		return "recipe";
+    }
+	
+	@RequestMapping(value = "/recipe/{id}/edit")
+	public String updateRecipe(@PathVariable("id") String id, Model model) {
+		logger.debug("Recived request to find recipe and to show page for modify.");
+		// find recipe by id
+		Recipe recipe = recipeRepository.findOne(id);
+		// add recipe to model
+		model.addAttribute(recipe);
+		// show recipe
+		return "recipe-modify";
+    }
+	
+	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
+	public String saveRecipe(Recipe recipe, Category category) {
+		logger.debug("");
+		// update recipe
+		recipeRepository.save(recipe);
 		
 		Category existCategory = categoryRepository.findByName(category.getName());
 		if(existCategory != null) {
@@ -94,43 +159,16 @@ public class RecipeController {
 			categoryRepository.save(category);
 		}
 		
-		// redirect to main page
-        return "redirect:/";
-    }
-	
-	@RequestMapping(value = "/recipe/{id}")
-    public String showRecipe(@PathVariable("id") String id, Model model) {
-		logger.debug("Recived request to find recipe and to show it on the page.");
-		// find recipe by id
-		Recipe recipe = recipeRepository.findOne(id);
-		// add recipe to model
-		model.addAttribute(recipe);
-		// show recipe
-		return "recipe";
-    }
-	
-	@RequestMapping(value = "/recipe/{id}/edit")
-	public String updateRecipe(@PathVariable("id") String id, Model model) {
-		logger.debug("Recived request");
-		
-		Recipe recipe = recipeRepository.findOne(id);
-		model.addAttribute(recipe);
-		return "recipe-modify";
-    }
-	
-	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
-	public String saveRecipe(Recipe recipe) {
-		logger.debug("");
-		
-		recipeRepository.save(recipe);
-		return "redirect:/";
+		// redirect to recipe page
+		return "redirect:/recipe/{id}";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/delete")
 	public String deleteRecipe(Recipe recipe) {
 		logger.debug("");
-		
+		// delete recipe
 		recipeRepository.delete(recipe);
+		// redirect to main page
 		return "redirect:/";
     }
 }

@@ -9,9 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "recipes")
 public class Recipe {
 	
-	//@Id
+	@Id
 	private String id;
 	private String title;
+	@DBRef
+	private Category category;
 	@DBRef
 	private List<Ingredient> ingredients;
 	private String recipe;
@@ -19,39 +21,37 @@ public class Recipe {
 	public String getId() {
 		return id;
 	}
-	
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 	public String getTitle() {
 		return title;
 	}
-	
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
-	
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
-	
 	public String getRecipe() {
 		return recipe;
 	}
-	
 	public void setRecipe(String recipe) {
 		this.recipe = recipe;
 	}
-
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", title=" + title + ", ingredients="
-				+ ingredients + ", recipe=" + recipe + "]";
+		return "Recipe [id=" + id + ", title=" + title + ", category="
+				+ "category" + ", ingredients=" + ingredients + ", recipe="
+				+ recipe + "]";
 	}
-	
 }
