@@ -137,7 +137,7 @@ public class RecipeController {
 		// update recipe
 		recipeRepository.save(recipe);
 		
-		Category existCategory = categoryRepository.findByName(category.getName());
+		/*Category existCategory = categoryRepository.findByName(category.getName());
 		if(existCategory != null) {
 			
 			List<Recipe> recipes = existCategory.getRecipes();
@@ -157,7 +157,7 @@ public class RecipeController {
 			category.setRecipes(recipes);
 			// save new recipe
 			categoryRepository.save(category);
-		}
+		}*/
 		
 		// redirect to recipe page
 		return "redirect:/recipe/{id}";
