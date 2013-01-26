@@ -14,12 +14,20 @@
       <log4j.version>[1.2,)</log4j.version>
       <jdk.version>1.6</jdk.version>
       <jetty.version></jetty.version>
-      <!-- mongodb.version>[2.2,)</mongodb.version-->
       <spring.version>3.2.0.RELEASE</spring.version>
-      <spring.mongodb.version>1.0.3.RELEASE</spring.mongodb.version>
+      <spring.mongodb.version>1.2.0.BUILD-SNAPSHOT</spring.mongodb.version>
       <sitemesh.version>[2.4,)</sitemesh.version>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>spring-maven-snapshot</id>
+      <snapshots><enabled>true</enabled></snapshots>
+      <name>Springframework Maven SNAPSHOT Repository</name>
+      <url>http://maven.springframework.org/snapshot</url>
+    </repository>
+  </repositories>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -44,14 +52,7 @@
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
     </dependency>
-
-	<!-- native java driver will be deleted in future 
-    <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongo-java-driver</artifactId>
-      <version>${mongodb.version}</version>
-    </dependency-->
-
+	
 	<!--  
         Core utilities used by other modules.  
         Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)  
@@ -78,7 +79,7 @@
       <artifactId>spring-data-mongodb</artifactId>
       <version>${spring.mongodb.version}</version>
     </dependency>
-
+    
 	<!--  
         Web application development utilities applicable to both Servlet and Portlet Environments  
         (depends on spring-core, spring-beans, spring-context)  
@@ -99,14 +100,7 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
-
-	<!-- Will be deleted in future 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>${spring.version}</version>
-    </dependency-->
-    
+	    
     <!-- Sitemesh -->
 	<dependency>
 	  <groupId>opensymphony</groupId>

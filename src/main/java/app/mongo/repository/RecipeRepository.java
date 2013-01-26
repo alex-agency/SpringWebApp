@@ -9,7 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface RecipeRepository extends MongoRepository<Recipe, String> {
 	
-	Recipe findByTitle(String title);
-	
-	List<Recipe> findByTitleLike(String title);
+	public List<Recipe> findByTitleLike(String title);
 }

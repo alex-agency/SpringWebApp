@@ -7,8 +7,10 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.core.GenericCollectionTypeResolver;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 public class CascadingMongoEventListener extends AbstractMongoEventListener {
 	
@@ -21,25 +23,46 @@ public class CascadingMongoEventListener extends AbstractMongoEventListener {
  
 			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 				ReflectionUtils.makeAccessible(field);
- 
+				
 				if (field.isAnnotationPresent(DBRef.class) && field.isAnnotationPresent(CascadeSave.class)) {
 					final Object fieldValue = field.get(source);
 
-					DbRefFieldCallback callback = new DbRefFieldCallback();
+					//if (fieldValue != null) {
+					//	Class fieldClass = fieldValue.getClass();
+					//	if (Collection.class.isAssignableFrom(field.getType())) {
+							//fieldClass = getParameterType(field);
+							//fieldClass = field.getClass();
+					//		System.out.println(field);
+							
+					//	}
+					//}
+					
+					//DbRefFieldCallback callback = new DbRefFieldCallback();
 
-					ReflectionUtils.doWithFields(fieldValue.getClass(), callback);
+					//ReflectionUtils.doWithFields(fieldValue.getClass(), callback);
 
-					if (!callback.isIdFound()) {
-						throw new MappingException("Cannot perform cascade save on child object without id set");
+					//if (!callback.isIdFound()) {
+						//throw new MappingException("Cannot perform cascade save on child object without id set");
+					//}
+					
+					if(fieldValue == null) {
+						return;
 					}
 
-					mongoOperations.save(fieldValue);
+					if (Collection.class.isAssignableFrom(field.getType())) {
+						Collection<Object> models = (Collection<Object>) fieldValue;
+						for (Object model : models) {
+							mongoOperations.save(model);
+						}
+					} else {
+						mongoOperations.save(fieldValue);
+					}
 				}
 			}
 		});
 	}
  
-	private static class DbRefFieldCallback implements ReflectionUtils.FieldCallback {
+/*	private static class DbRefFieldCallback implements ReflectionUtils.FieldCallback {
 		private boolean idFound;
  
 		public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
@@ -53,5 +76,5 @@ public class CascadingMongoEventListener extends AbstractMongoEventListener {
 		public boolean isIdFound() {
 			return idFound;
         }
-    }
+    }*/
 }
