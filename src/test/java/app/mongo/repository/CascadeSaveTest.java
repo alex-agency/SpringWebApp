@@ -35,8 +35,10 @@ public class CascadeSaveTest {
     	// CREATE
     	
     	Category testCategory = new Category("category.name");
-    	Recipe testRecipe1 = new Recipe("recipe1.title");
-    	Recipe testRecipe2 = new Recipe("recipe2.title");
+    	Recipe testRecipe1 = new Recipe();
+    	testRecipe1.setTitle("recipe1.title");
+    	Recipe testRecipe2 = new Recipe();
+    	testRecipe2.setTitle("recipe2.title");
     	
     	testCategory.setRecipes(Arrays.asList(testRecipe1, testRecipe2));
     	

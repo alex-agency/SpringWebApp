@@ -18,7 +18,7 @@
 
 <section id="category">
 	<div class="page-header">
-		<h2>Category</h2>
+		<h2>All Recipes</h2>
 	</div>
 	
 	<ul class="thumbnails">

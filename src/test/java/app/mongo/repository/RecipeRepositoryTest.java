@@ -30,7 +30,9 @@ public class RecipeRepositoryTest {
 		
 		// CREATE
 		
-		Recipe testRecipe = new Recipe("recipe.title");
+		Recipe testRecipe = new Recipe();
+		testRecipe.setTitle("recipe.title");
+		testRecipe.setIngredients("recipe.ingredients");
 		testRecipe.setBody("recipe.body");
 		
 		recipeRepository.save(testRecipe);
@@ -49,7 +51,8 @@ public class RecipeRepositoryTest {
 		
 		// UPDATE
 		
-		Recipe newRecipe = new Recipe("New title");
+		Recipe newRecipe = new Recipe();
+		newRecipe.setTitle("new title");
 		newRecipe.setId(mongoRecipe.getId());
 		
 		recipeRepository.save(newRecipe);

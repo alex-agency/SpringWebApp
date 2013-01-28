@@ -2,13 +2,16 @@
  
 <table>
     <tr>
-        <td><label>${recipe.title}</label></td>
+        <td><label>Title</label></td>
+        <td><input name="title" value="${recipe.title}" /></td> 
     </tr>
     <tr>
-        <td><label>${category.name}</label></td>
+        <td><label>Ingredients</label></td>
+        <td><input name="ingredients" value="${recipe.ingredients}" /></td>
     </tr>
     <tr>
-        <td><label>${recipe.recipe}</label></td>
+        <td><label>Recipe</label></td>
+        <td><input name="body" value="${recipe.body}" /></td>
     </tr>
     <tr>
         <td><a href="${recipe.id}/edit">Edit</a></td>

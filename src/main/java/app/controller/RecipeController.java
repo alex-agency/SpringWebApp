@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,6 +44,10 @@ public class RecipeController {
 		List<Category> categories = categoryRepository.findAll();
 		// add list of categories to model of cookbook
 		model.addAttribute("categories", categories);
+		
+		List<Recipe> recipes = recipeRepository.findAll();
+		model.addAttribute("recipes", recipes);
+		
 		// show main page
         return "cookbook";
     }
@@ -59,58 +64,15 @@ public class RecipeController {
 		logger.debug("Received request to save new recipe.");
 		
 		List<Recipe> existRecipeList = recipeRepository.findByTitleLike(recipe.getTitle());
-
-		if(existRecipeList.isEmpty()) {
-			
-			
-			
+		List<Category> existCategoryList = categoryRepository.findByNameLike(category.getName());
+		
+		if(existRecipeList.isEmpty() && existCategoryList.isEmpty()) {
+			category.setRecipes(Arrays.asList(recipe));
+			// cascade save
 			categoryRepository.save(category);
-			
-			
-			
 		} else {
-			existRecipe.setRecipe(recipe.getRecipe());
-			// update recipe
-			recipeRepository.save(existRecipe);
+			System.out.println("it exesits");
 		}
-		
-		
-		
-		
-		/* else {
-			
-		recipeRepository.
-			
-			//categoryRepository.save(category);
-			
-			System.out.println(recipe);*/
-			
-			//System.out.println(category);
-			// save new recipe
-			//recipeRepository.save(recipe);
-		//}
-		
-		/*Category existCategory = categoryRepository.findByName(category.getName());
-		if(existCategory != null) {
-			
-			List<Recipe> recipes = existCategory.getRecipes();
-			if(recipes == null) {
-				recipes = new ArrayList<Recipe>();
-			}
-			recipes.add(recipe);
-			
-			existCategory.setRecipes(recipes);
-			// update category
-			categoryRepository.save(existCategory);
-		} else {
-			
-			List<Recipe> recipes = new ArrayList<Recipe>();
-			recipes.add(recipe);
-			
-			category.setRecipes(recipes);
-			// save new recipe
-			categoryRepository.save(category);
-		}*/
 		
 		// redirect to main page
         return "redirect:/";
@@ -141,8 +103,16 @@ public class RecipeController {
 	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
 	public String saveRecipe(Recipe recipe, Category category) {
 		logger.debug("");
+		
+		
+		
+		
+		
+		
 		// update recipe
-		recipeRepository.save(recipe);
+		//recipeRepository.save(recipe);
+		
+		
 		
 		/*Category existCategory = categoryRepository.findByName(category.getName());
 		if(existCategory != null) {
@@ -175,6 +145,17 @@ public class RecipeController {
 		logger.debug("");
 		// delete recipe
 		recipeRepository.delete(recipe);
+		// redirect to main page
+		return "redirect:/";
+    }
+	
+	@RequestMapping(value = "/clear")
+	public String clear() {
+		logger.debug("");
+		// delete all recipes
+		recipeRepository.deleteAll();
+		// delete all categories
+		categoryRepository.deleteAll();
 		// redirect to main page
 		return "redirect:/";
     }

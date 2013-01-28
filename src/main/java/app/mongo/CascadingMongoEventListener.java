@@ -52,9 +52,13 @@ public class CascadingMongoEventListener extends AbstractMongoEventListener {
 					if (Collection.class.isAssignableFrom(field.getType())) {
 						Collection<Object> models = (Collection<Object>) fieldValue;
 						for (Object model : models) {
+							
+							System.out.println("Cascading save model - "+model);
 							mongoOperations.save(model);
 						}
 					} else {
+						
+						System.out.println("Classic save field - "+fieldValue);
 						mongoOperations.save(fieldValue);
 					}
 				}
