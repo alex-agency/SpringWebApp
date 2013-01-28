@@ -16,7 +16,6 @@ import org.springframework.web.context.request.WebRequest;
 import app.domain.Category;
 import app.domain.Recipe;
 import app.mongo.repository.CategoryRepository;
-import app.mongo.repository.IngredientRepository;
 import app.mongo.repository.RecipeRepository;
 import app.util.AjaxUtils;
 
@@ -30,8 +29,6 @@ public class RecipeController {
 	private RecipeRepository recipeRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	@Autowired
-	private IngredientRepository ingredientRepository;
 	
 	// Invoked on every request
 	@ModelAttribute
@@ -61,16 +58,26 @@ public class RecipeController {
     public String saveRecipe(Model model, Recipe recipe, Category category) {
 		logger.debug("Received request to save new recipe.");
 		
-		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
-		
-		System.out.println(existRecipe);
-		
-		/*if(existRecipe != null) {
+		List<Recipe> existRecipeList = recipeRepository.findByTitleLike(recipe.getTitle());
+
+		if(existRecipeList.isEmpty()) {
 			
+			
+			
+			categoryRepository.save(category);
+			
+			
+			
+		} else {
 			existRecipe.setRecipe(recipe.getRecipe());
 			// update recipe
 			recipeRepository.save(existRecipe);
-		} else {
+		}
+		
+		
+		
+		
+		/* else {
 			
 		recipeRepository.
 			

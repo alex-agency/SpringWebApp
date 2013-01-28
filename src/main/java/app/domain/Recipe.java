@@ -14,9 +14,6 @@ public class Recipe {
 	@Id
 	private String id;
 	private String title;
-	@DBRef
-	@CascadeSave
-	private List<Ingredient> ingredients;
 	private String body;
 	
 	public Recipe(String title) {
@@ -39,14 +36,6 @@ public class Recipe {
 		this.title = title;
 	}
 	
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
-	
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
-	
 	public String getBody() {
 		return body;
 	}
@@ -57,8 +46,7 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", title=" + title + ", ingredients="
-				+ ingredients + ", body=" + body + "]";
+		return "Recipe [id=" + id + ", title=" + title + ", body=" + body + "]";
 	}
 
 	@Override
@@ -67,8 +55,6 @@ public class Recipe {
 		int result = 1;
 		result = prime * result + ((body == null) ? 0 : body.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -97,13 +83,6 @@ public class Recipe {
 				return false;
 			}
 		} else if (!id.equals(other.id)) {
-			return false;
-		}
-		if (ingredients == null) {
-			if (other.ingredients != null) {
-				return false;
-			}
-		} else if (!ingredients.equals(other.ingredients)) {
 			return false;
 		}
 		if (title == null) {
