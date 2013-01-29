@@ -1,12 +1,7 @@
 package app.domain;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import app.mongo.CascadeSave;
 
 @Document(collection = "recipes")
 public class Recipe {
@@ -16,10 +11,6 @@ public class Recipe {
 	private String title;
 	private String ingredients;
 	private String body;
-	
-	//public Recipe(String title) {
-	//	this.title = title;
-	//}
 	
 	public String getId() {
 		return id;

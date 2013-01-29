@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 	<span class="icon-bar"></span>
@@ -13,7 +15,9 @@
 
 <div class="nav-collapse">
 	<ul class="nav">
-		<li><a href="#category1">Main dishes</a></li>
-		<li><a href="#category2">Main dishes2</a></li>
+		<li><a href="/add-category">Add New Category</a></li>
+		<c:forEach var="category" items="${categories}">
+			<li><a href="#${category.name}">${category.name}</a></li>
+		</c:forEach>
 	</ul>
 </div-->

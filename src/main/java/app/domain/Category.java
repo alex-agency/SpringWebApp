@@ -18,10 +18,6 @@ public class Category {
     @CascadeSave
 	private List<Recipe> recipes;
 	
-	public Category(String name) {
-		this.name = name;
-	}
-	
 	public String getId() {
 		return id;
 	}

@@ -30,7 +30,8 @@ public class CategoryRepositoryTest {
 		
 		// CREATE
 		
-		Category testCategory = new Category("category.name");
+		Category testCategory = new Category();
+		testCategory.setName("category.name");
 		
 		categoryRepository.save(testCategory);
 		
@@ -48,8 +49,9 @@ public class CategoryRepositoryTest {
 		
 		// UPDATE
 		
-		Category newCategory = new Category("New name");
+		Category newCategory = new Category();
 		newCategory.setId(mongoCategory.getId());
+		newCategory.setName("New name");
 		
 		categoryRepository.save(newCategory);
 		

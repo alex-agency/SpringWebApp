@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:forEach var="category" items="${categories}">
-	
 	<section id="${category.name}">
 		<div class="page-header">
-			<h2>${category.name}</h2>
+			<h2><a href="/category/${category.id}">${category.name}</a></h2>
 		</div>
 		
 		<ul class="thumbnails">
@@ -18,7 +17,7 @@
 
 <section id="category">
 	<div class="page-header">
-		<h2>All Recipes</h2>
+		<h2><a href="/add-recipe">Add New Recipe</a></h2>
 	</div>
 	
 	<ul class="thumbnails">

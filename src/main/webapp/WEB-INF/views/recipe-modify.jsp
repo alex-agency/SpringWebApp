@@ -1,5 +1,6 @@
-<form method="post">
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<form method="post"> 
 <table>
     <tr>
         <td><label>Title</label></td>
@@ -7,7 +8,14 @@
     </tr>
     <tr>
         <td><label>Category</label></td>
-        <td><input name="category" value="${category.name}" /></td>
+        <td>
+	        <select>
+	        	<c:forEach var="category" items="${categories}">
+	        		<option>${category.name}</option>
+	        	</c:forEach>
+	        	<option><a href="/add-category">New Category</a></option>
+	    	</select>
+    	</td>
     </tr>
     <tr>
         <td><label>Ingredients</label></td>

@@ -1,9 +1,6 @@
 package app.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,6 @@ import app.mongo.repository.RecipeRepository;
 import app.util.AjaxUtils;
 
 @Controller
-@RequestMapping
 public class RecipeController {
 	protected static Logger logger = Logger.getLogger(RecipeController.class);
 	
@@ -37,21 +33,6 @@ public class RecipeController {
 		model.addAttribute("ajaxRequest", AjaxUtils.isAjaxRequest(request));
 	}
 	
-	@RequestMapping("/")
-    public String showCookbook(Model model) {
-		logger.debug("Received request to show cookbook page with all categories and recipes.");
-		// get all categories which already has own recipes
-		List<Category> categories = categoryRepository.findAll();
-		// add list of categories to model of cookbook
-		model.addAttribute("categories", categories);
-		
-		List<Recipe> recipes = recipeRepository.findAll();
-		model.addAttribute("recipes", recipes);
-		
-		// show main page
-        return "cookbook";
-    }
-	
 	@RequestMapping(value = "/add-recipe")
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
@@ -60,13 +41,13 @@ public class RecipeController {
     }
 	
 	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
-    public String saveRecipe(Model model, Recipe recipe, Category category) {
+    public String saveRecipe(Recipe recipe, Category category) {
 		logger.debug("Received request to save new recipe.");
 		
-		List<Recipe> existRecipeList = recipeRepository.findByTitleLike(recipe.getTitle());
-		List<Category> existCategoryList = categoryRepository.findByNameLike(category.getName());
+		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
+		Category existCategory = categoryRepository.findByName(category.getName());
 		
-		if(existRecipeList.isEmpty() && existCategoryList.isEmpty()) {
+		if(existRecipe == null && existCategory == null) {
 			category.setRecipes(Arrays.asList(recipe));
 			// cascade save
 			categoryRepository.save(category);
@@ -101,41 +82,12 @@ public class RecipeController {
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
-	public String saveRecipe(Recipe recipe, Category category) {
+	public String saveRecipe(@PathVariable("id") String id, Recipe recipe) {
 		logger.debug("");
-		
-		
-		
-		
-		
-		
+		// set absent id
+		recipe.setId(id);
 		// update recipe
-		//recipeRepository.save(recipe);
-		
-		
-		
-		/*Category existCategory = categoryRepository.findByName(category.getName());
-		if(existCategory != null) {
-			
-			List<Recipe> recipes = existCategory.getRecipes();
-			if(recipes == null) {
-				recipes = new ArrayList<Recipe>();
-			}
-			recipes.add(recipe);
-			
-			existCategory.setRecipes(recipes);
-			// update category
-			categoryRepository.save(existCategory);
-		} else {
-			
-			List<Recipe> recipes = new ArrayList<Recipe>();
-			recipes.add(recipe);
-			
-			category.setRecipes(recipes);
-			// save new recipe
-			categoryRepository.save(category);
-		}*/
-		
+		recipeRepository.save(recipe);
 		// redirect to recipe page
 		return "redirect:/recipe/{id}";
     }
@@ -145,17 +97,6 @@ public class RecipeController {
 		logger.debug("");
 		// delete recipe
 		recipeRepository.delete(recipe);
-		// redirect to main page
-		return "redirect:/";
-    }
-	
-	@RequestMapping(value = "/clear")
-	public String clear() {
-		logger.debug("");
-		// delete all recipes
-		recipeRepository.deleteAll();
-		// delete all categories
-		categoryRepository.deleteAll();
 		// redirect to main page
 		return "redirect:/";
     }
