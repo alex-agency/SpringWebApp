@@ -2,6 +2,7 @@ package app.domain;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,6 +14,7 @@ public class Category {
 	
 	@Id
 	private String id;
+	@NotEmpty
 	private String name;	
 	@DBRef
     @CascadeSave

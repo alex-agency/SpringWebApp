@@ -4,16 +4,16 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import app.domain.Category;
 import app.mongo.repository.CategoryRepository;
 import app.util.AjaxUtils;
+import javax.validation.Valid;
 
 @Controller
 public class CategoryController {
@@ -32,15 +32,21 @@ public class CategoryController {
 	@RequestMapping(value = "/add-category")
     public String createCategory(Model model) {
 		logger.debug("Received request to show a page for create new category.");
+		// create new category
+		model.addAttribute("category", new Category());
 		// show page for create category
         return "category-modify";
     }
 	
 	@RequestMapping(value = "/add-category", method = RequestMethod.POST)
-    public String saveCategory(Category category, @ModelAttribute("ajaxRequest") boolean ajaxRequest,
-    		Model model, RedirectAttributes redirectAttrs,
-    		BindingResult result,) {
+    public String saveCategory(@Valid Category category, BindingResult result,
+    							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new category.");
+		
+		if (result.hasErrors()) {
+			System.out.println("has errors");
+			return "redirect:/add-category";
+		}
 		
 		Category existCategory = categoryRepository.findByName(category.getName());
 		
@@ -51,26 +57,14 @@ public class CategoryController {
 			System.out.println("it exesits");
 		}
 		
-		if (result.hasErrors()) {
-			return null;
-		}
-		
-		// Success response handling
+		// AJAX
 		if (ajaxRequest) {
-			// prepare model for rendering success message in this request
-			model.addAttribute("message", message);
+			System.out.println("AJAX request");
 			return null;
-		} else {
-			// store a success message for rendering on the next request after redirect
-			// redirect back to the form to render the success message along with newly bound values
-			redirectAttrs.addFlashAttribute("message", message);
-			return "redirect:/form";			
 		}
-		
 		
 		// redirect to main page
-        //return "redirect:/";
-        return "category-modify";
+        return "redirect:/";
     }
 	
 	@RequestMapping(value = "/category/{id}")

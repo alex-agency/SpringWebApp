@@ -16,6 +16,7 @@
       <jetty.version></jetty.version>
       <spring.version>3.2.0.RELEASE</spring.version>
       <spring.mongodb.version>1.2.0.BUILD-SNAPSHOT</spring.mongodb.version>
+      <hibernate.version>4.2.0.Final</hibernate.version>
       <sitemesh.version>[2.4,)</sitemesh.version>
   </properties>
 
@@ -100,7 +101,14 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
-	    
+    
+    <!-- Hibernate Validator -->
+	<dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-validator</artifactId>
+	  <version>${hibernate.version}</version>
+	</dependency>
+	
     <!-- Sitemesh -->
 	<dependency>
 	  <groupId>opensymphony</groupId>

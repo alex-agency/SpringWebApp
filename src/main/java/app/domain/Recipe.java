@@ -1,5 +1,6 @@
 package app.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,6 +9,7 @@ public class Recipe {
 	
 	@Id
 	private String id;
+	@NotEmpty
 	private String title;
 	private String ingredients;
 	private String body;
