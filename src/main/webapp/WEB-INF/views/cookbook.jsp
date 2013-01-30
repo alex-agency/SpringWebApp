@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:forEach var="category" items="${categories}">
 	<section id="${category.name}">
 		<div class="page-header">
@@ -7,62 +8,21 @@
 		
 		<ul class="thumbnails">
 			<c:forEach var="recipe" items="${category.recipes}">
-				
-				<li><a class="thumbnail" href="/recipe/${recipe.id}">${recipe}</a></li>
+				<li class="span3">
+					<a href="/recipe/${recipe.id}" class="thumbnail">
+						<img data-src="holder.js/260x200">
+						<div class="caption">
+      						<h3>${recipe.title}</h3>
+    					</div>
+    				</a>
+				</li>
 			</c:forEach>
 		</ul>
 	</section>
 </c:forEach>
 
-<section id="category">
-	<div class="page-header">
-		<h2><a href="/add-recipe">Add New Recipe</a></h2>
-	</div>
-	
-	<ul class="thumbnails">
-		<c:forEach var="recipe" items="${recipes}">
-			<li><a class="thumbnail" href="/recipe/${recipe.id}">${recipe}</a></li>
-		</c:forEach>
-	</ul>
-</section>
-
-<!--section id="category1">
-	<div class="page-header">
-		<h2>Main dishes</h2>
-	</div>
-
-	<ul class="thumbnails">
-		<li><a class="thumbnail" href="#">Apple Pie</a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-	</ul>
-</section>
-
-<section id="category2">
-	<div class="page-header">
-		<h2>Main dishes2</h2>
-	</div>
-
-	<ul class="thumbnails">
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-		<li><a class="thumbnail" href="#"><img src="holder.js/200x200"></a></li>
-	</ul>
-</section-->
+<ul class="thumbnails">
+	<c:forEach var="recipe" items="${recipes}">
+		<li><a class="thumbnail" href="/recipe/${recipe.id}">${recipe}</a></li>
+	</c:forEach>
+</ul>

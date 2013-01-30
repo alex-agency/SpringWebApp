@@ -36,6 +36,8 @@ public class RecipeController {
 	@RequestMapping(value = "/add-recipe")
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
+		// recipe new category
+		model.addAttribute("recipe", new Recipe());
 		// show page for create recipe
         return "recipe-modify";
     }

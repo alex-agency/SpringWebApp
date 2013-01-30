@@ -45,7 +45,7 @@ public class CategoryController {
 		
 		if (result.hasErrors()) {
 			System.out.println("has errors");
-			return "redirect:/add-category";
+			return "category-modify";
 		}
 		
 		Category existCategory = categoryRepository.findByName(category.getName());

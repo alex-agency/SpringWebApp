@@ -15,7 +15,6 @@
 
 <div class="nav-collapse">
 	<ul class="nav">
-		<li><a href="/add-category">Add New Category</a></li>
 		<c:forEach var="category" items="${categories}">
 			<li><a href="#${category.name}">${category.name}</a></li>
 		</c:forEach>

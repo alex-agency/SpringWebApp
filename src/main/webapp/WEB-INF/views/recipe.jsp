@@ -1,22 +1,19 @@
-<form>
- 
-<table>
-    <tr>
-        <td><label>Title</label></td>
-        <td><input name="title" value="${recipe.title}" /></td> 
-    </tr>
-    <tr>
-        <td><label>Ingredients</label></td>
-        <td><input name="ingredients" value="${recipe.ingredients}" /></td>
-    </tr>
-    <tr>
-        <td><label>Recipe</label></td>
-        <td><input name="body" value="${recipe.body}" /></td>
-    </tr>
-    <tr>
-        <td><a href="${recipe.id}/edit">Edit</a></td>
-        <td><a href="${recipe.id}/delete">Delete</a></td>
-    </tr>
-</table>  
-     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<form class="form-horizontal">
+	<fieldset><legend>Category info</legend>
+		<ul class="thumbnails">
+			<li class="span4">
+				<h3>${recipe.title}</h3>
+				<p>${recipe.ingredients}</p>
+				<p>${recipe.body}</p>
+			</li>
+			<li class="span4 thumbnail" >
+				<img data-src="holder.js/380x380">
+			</li>
+		</ul>
+	</fieldset>
+	
+	<a href="${recipe.id}/edit" class="btn btn-primary">Edit</a>
+	<a href="${recipe.id}/delete" class="btn btn-primary">Delete</a>
 </form>
