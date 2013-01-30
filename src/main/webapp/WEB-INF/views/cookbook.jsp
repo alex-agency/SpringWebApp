@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <c:forEach var="category" items="${categories}">
 	<section id="${category.name}">
 		<div class="page-header">

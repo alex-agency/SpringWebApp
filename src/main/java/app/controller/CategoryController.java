@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.domain.Category;
 import app.mongo.repository.CategoryRepository;
@@ -36,7 +37,9 @@ public class CategoryController {
     }
 	
 	@RequestMapping(value = "/add-category", method = RequestMethod.POST)
-    public String saveCategory(Category category) {
+    public String saveCategory(Category category, @ModelAttribute("ajaxRequest") boolean ajaxRequest,
+    		Model model, RedirectAttributes redirectAttrs,
+    		BindingResult result,) {
 		logger.debug("Received request to save new category.");
 		
 		Category existCategory = categoryRepository.findByName(category.getName());
@@ -47,8 +50,27 @@ public class CategoryController {
 		} else {
 			System.out.println("it exesits");
 		}
+		
+		if (result.hasErrors()) {
+			return null;
+		}
+		
+		// Success response handling
+		if (ajaxRequest) {
+			// prepare model for rendering success message in this request
+			model.addAttribute("message", message);
+			return null;
+		} else {
+			// store a success message for rendering on the next request after redirect
+			// redirect back to the form to render the success message along with newly bound values
+			redirectAttrs.addFlashAttribute("message", message);
+			return "redirect:/form";			
+		}
+		
+		
 		// redirect to main page
-        return "redirect:/";
+        //return "redirect:/";
+        return "category-modify";
     }
 	
 	@RequestMapping(value = "/category/{id}")
