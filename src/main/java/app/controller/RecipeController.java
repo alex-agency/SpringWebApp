@@ -1,10 +1,14 @@
 package app.controller;
 
 import java.util.Arrays;
+
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +47,14 @@ public class RecipeController {
     }
 	
 	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
-    public String saveRecipe(Recipe recipe, Category category) {
+    public String saveRecipe(@Valid Recipe recipe, Category category, BindingResult result,
+    							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new recipe.");
+		
+		if (result.hasErrors()) {
+			System.out.println("has errors");
+			return "recipe-modify";
+		}
 		
 		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
 		Category existCategory = categoryRepository.findByName(category.getName());

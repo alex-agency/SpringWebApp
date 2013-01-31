@@ -13,6 +13,10 @@
 		<div class="control-group">
 			<label class="control-label" path="category">Category</label>
 			<div class="controls">
+				<form:select path="category">
+   					<form:option value="NONE" label="--- Select ---"/>
+   					<form:options items="${categories}" />
+				</form:select>
 				<select>
 					<c:forEach var="category" items="${categories}">
 						<option>${category.name}</option>
