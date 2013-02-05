@@ -18,7 +18,6 @@
       <spring.mongodb.version>1.2.0.BUILD-SNAPSHOT</spring.mongodb.version>
       <hibernate.version>4.2.0.Final</hibernate.version>
       <sitemesh.version>[2.4,)</sitemesh.version>
-      <lucene.version>3.0.1</lucene.version>
   </properties>
 
   <repositories>
@@ -115,13 +114,6 @@
 	  <groupId>opensymphony</groupId>
 	  <artifactId>sitemesh</artifactId>
 	  <version>${sitemesh.version}</version>
-	</dependency>
-	
-	<!-- Lucene -->
-	<dependency>
-	  <groupId>org.apache.lucene</groupId>
-	  <artifactId>lucene-core</artifactId>
-	  <version>${lucene.version}</version>
 	</dependency>
 
   </dependencies>
