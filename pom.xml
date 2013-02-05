@@ -27,6 +27,16 @@
       <name>Springframework Maven SNAPSHOT Repository</name>
       <url>http://maven.springframework.org/snapshot</url>
     </repository>
+    
+	<repository>
+	  <id>spring-data-elasticsearch</id>
+	  <url>https://github.com/BioMedCentralLtd/spring-data-elasticsearch.git</url>
+	  <!-- use snapshot version -->
+	  <snapshots>
+	    <enabled>true</enabled>
+	    <updatePolicy>always</updatePolicy>
+	  </snapshots>
+	</repository>
   </repositories>
   
   <dependencies>
@@ -115,6 +125,13 @@
 	  <artifactId>sitemesh</artifactId>
 	  <version>${sitemesh.version}</version>
 	</dependency>
+	
+	<!-- Spring Data Elasticsearch
+	<dependency>
+    	<groupId>org.springframework.data</groupId>
+    	<artifactId>spring-data-elasticsearch</artifactId>
+    	<version>1.0.0.BUILD-SNAPSHOT</version>
+	</dependency -->
 
   </dependencies>
   <build>
