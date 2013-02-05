@@ -3,10 +3,8 @@ package app.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.hibernate.search.annotations.Indexed;
 
 @Document(collection = "recipes")
-@Indexed
 public class Recipe {
 	
 	@Id
