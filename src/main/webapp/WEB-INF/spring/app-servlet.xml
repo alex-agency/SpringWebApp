@@ -47,11 +47,12 @@
     <!-- Cascade save support -->
     <bean class="app.mongo.CascadingMongoEventListener" />  
     
-    <!-- ElasticSearch configuration -->
+    <!-- ElasticSearch configuration
     <elasticsearch:node-client id="client" local="true"/>
+
     <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
         <constructor-arg name="client" ref="client"/>
-    </bean>
+    </bean-->
     
 </beans>
         

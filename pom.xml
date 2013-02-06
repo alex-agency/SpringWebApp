@@ -116,14 +116,14 @@
 	  <version>${sitemesh.version}</version>
 	</dependency>
 	
-	<!-- Spring Data Elasticsearch
+	<!-- Spring Data Elasticsearch -->
 	<dependency>
     	<groupId>org.springframework.data</groupId>
     	<artifactId>spring-data-elasticsearch</artifactId>
     	<version>1.0.0.BUILD-SNAPSHOT</version>
     	<scope>system</scope>
     	<systemPath>${project.basedir}/lib/spring-data-elasticsearch-1.0.0.BUILD-SNAPSHOT.jar</systemPath>
-	</dependency-->
+	</dependency>
 	
   </dependencies>
   <build>
