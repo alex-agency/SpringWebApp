@@ -27,16 +27,6 @@
       <name>Springframework Maven SNAPSHOT Repository</name>
       <url>http://maven.springframework.org/snapshot</url>
     </repository>
-    
-	<repository>
-	  <id>spring-data-elasticsearch</id>
-	  <url>https://github.com/BioMedCentralLtd/spring-data-elasticsearch.git</url>
-	  <!-- use snapshot version -->
-	  <snapshots>
-	    <enabled>true</enabled>
-	    <updatePolicy>always</updatePolicy>
-	  </snapshots>
-	</repository>
   </repositories>
   
   <dependencies>
@@ -131,8 +121,10 @@
     	<groupId>org.springframework.data</groupId>
     	<artifactId>spring-data-elasticsearch</artifactId>
     	<version>1.0.0.BUILD-SNAPSHOT</version>
-	</dependency -->
-
+    	<scope>system</scope>
+    	<systemPath>${project.basedir}/lib/spring-data-elasticsearch-1.0.0.BUILD-SNAPSHOT.jar</systemPath>
+	</dependency-->
+	
   </dependencies>
   <build>
     <finalName>MySpringMVCApp</finalName>

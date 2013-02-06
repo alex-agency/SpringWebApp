@@ -2,12 +2,16 @@ package app.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.mapping.model.MappingException;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.core.GenericCollectionTypeResolver;
+
+import app.domain.Category;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -16,6 +20,8 @@ public class CascadingMongoEventListener extends AbstractMongoEventListener {
 	
 	@Autowired
 	private MongoOperations mongoOperations;
+	@Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
     
 	@Override
 	public void onBeforeConvert(final Object source) {
@@ -57,6 +63,11 @@ public class CascadingMongoEventListener extends AbstractMongoEventListener {
 							mongoOperations.save(model);
 						}
 					} else {
+						
+						IndexQuery indexQuery = new IndexQuery();
+						indexQuery.setObject(fieldValue);
+						indexQuery.setId(((Category) fieldValue).getId());
+						elasticsearchTemplate.index(indexQuery);
 						
 						System.out.println("Classic save field - "+fieldValue);
 						mongoOperations.save(fieldValue);

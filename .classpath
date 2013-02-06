@@ -27,4 +27,5 @@
   <classpathentry kind="var" path="M2_REPO/org/mongodb/mongo-java-driver/2.9.2/mongo-java-driver-2.9.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/opensymphony/sitemesh/2.4.2/sitemesh-2.4.2.jar"/>
+  <classpathentry kind="lib" path="lib/spring-data-elasticsearch-1.0.0.BUILD-SNAPSHOT.jar"/>
 </classpath>

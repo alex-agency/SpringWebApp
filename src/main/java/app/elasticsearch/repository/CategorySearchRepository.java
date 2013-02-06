@@ -1,7 +1,8 @@
-package app.elasticsearch.repository;
+/*package app.elasticsearch.repository;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import app.domain.Category;
 
-public class CategorySearchRepository extends ElasticsearchRepository {
-
-}
+public interface CategorySearchRepository extends ElasticsearchRepository<Category, String> {
+	
+}*/
