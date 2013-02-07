@@ -41,6 +41,7 @@ public class RecipeController {
 		logger.debug("Received request to show a page for create new recipe.");
 		
 		model.addAttribute("recipe", new Recipe());
+		model.addAttribute("category", new Category());
 		List<Category> categories = categoryService.getAll();
 		model.addAttribute("categories", categories);
 		// show jsp page

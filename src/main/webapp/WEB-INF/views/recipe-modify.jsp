@@ -13,20 +13,15 @@
 		<div class="control-group">
 			<label class="control-label" path="category">Category</label>
 			<div class="controls">
-				<select name="categories">
-					<c:forEach var="category" items="${categories}">
-						<option>${category.name}</option>
-					</c:forEach>
-				</select>
-				<%-- <form:form modelAttribute="categories">
-					<form:select path="name">
+				<%-- <select name="category">
+   					<c:forEach items="${categories}" var="category">
+       					<option value="${category.name}">${category.name}</option>
+   					</c:forEach>
+				</select> --%>
+					<form:select modelAttribute="category" path="category.name">
 	    				<form:option value="" label="-- Choose one--" />
 	    				<form:options items="${categories}" itemValue="id" itemLabel="name" />
 					</form:select>
-					<form:errors path="name">
-	    				<span class="help-inline"><form:errors path="name" /></span>
-					</form:errors>
-				</form:form> --%>
 			</div>
 		</div>
 		<div class="control-group">
