@@ -1,6 +1,5 @@
 package app.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,19 +17,18 @@ import org.springframework.web.context.request.WebRequest;
 
 import app.domain.Category;
 import app.domain.Recipe;
-import app.mongo.repository.CategoryRepository;
-import app.mongo.repository.RecipeRepository;
+import app.service.CategoryService;
+import app.service.RecipeService;
 import app.util.AjaxUtils;
 
 @Controller
 public class RecipeController {
 	protected static Logger logger = Logger.getLogger(RecipeController.class);
 	
-	// Auto wired fields before create object
 	@Autowired
-	private RecipeRepository recipeRepository;
+	RecipeService recipeService;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	CategoryService categoryService;
 	
 	// Invoked on every request
 	@ModelAttribute
@@ -41,85 +39,81 @@ public class RecipeController {
 	@RequestMapping(value = "/add-recipe")
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
-		// create new recipe
+		
 		model.addAttribute("recipe", new Recipe());
-		// get all categories
-		List<Category> categories = categoryRepository.findAll();
+		List<Category> categories = categoryService.getAll();
 		model.addAttribute("categories", categories);
-		// show page for create recipe
+		// show jsp page
         return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
-    public String saveRecipe(@Valid Recipe recipe, @Valid Category category, BindingResult result,
+    public String saveRecipe(@Valid Recipe recipe, 
+    							@Valid Category category, 
+    							BindingResult result,
     							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new recipe.");
 		
 		System.out.println(recipe);
 		System.out.println(category);
 		
-		// show error
 		if (result.hasErrors()) {
 			System.out.println("has errors");
 			return "recipe-modify";
 		}
-		// get recipe and category from db
-		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
-		Category existCategory = categoryRepository.findByName(category.getName());
 		
-		if(existRecipe != null) {
-			// put existing
-			existCategory.putRecipe(existRecipe);
-		} else {
-			// put new recipe
-			existCategory.putRecipe(recipe);
-		}
-		
-		// cascade save
-		categoryRepository.save(category);
+		recipeService.save(recipe);
+		categoryService.save(category);
 		
 		// redirect to main page
         return "redirect:/";
     }
 	
 	@RequestMapping(value = "/recipe/{id}")
-    public String showRecipe(@PathVariable("id") String id, Model model) {
+    public String showRecipe(@PathVariable("id") String id, 
+    							Model model) {
 		logger.debug("Recived request to find recipe and to show it on the page.");
-		// find recipe by id
-		Recipe recipe = recipeRepository.findOne(id);
-		// add recipe to model
+		
+		Recipe recipe = recipeService.get(id);
 		model.addAttribute(recipe);
-		// show recipe
+		// show jsp page
 		return "recipe";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit")
-	public String updateRecipe(@PathVariable("id") String id, Model model) {
+	public String editRecipe(@PathVariable("id") String id, 
+								Model model) {
 		logger.debug("Recived request to find recipe and to show page for modify.");
-		// find recipe by id
-		Recipe recipe = recipeRepository.findOne(id);
-		// add recipe to model
+		
+		Recipe recipe = recipeService.get(id);
 		model.addAttribute(recipe);
-		// show recipe
+		// show jsp page
 		return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
-	public String saveRecipe(@PathVariable("id") String id, Recipe recipe) {
-		logger.debug("");
-		// set absent id
-		recipe.setId(id);
-		// update recipe
-		recipeRepository.save(recipe);
-		// redirect to recipe page
-		return "redirect:/recipe/{id}";
+	public String updateRecipe(@Valid Recipe recipe,
+								@Valid Category category,
+								BindingResult result) {
+		logger.debug("Recived request to find recipe and to show page for modify.");
+		
+		if (result.hasErrors()) {
+			System.out.println("has errors");
+			return "recipe-modify";
+		}
+		
+		recipeService.save(recipe);
+		categoryService.save(category);
+		
+		// show jsp page
+		return "recipe";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/delete")
 	public String deleteRecipe(Recipe recipe) {
-		logger.debug("");
-		// delete recipe
-		recipeRepository.delete(recipe);
+		logger.debug("Recived request to delete recipe.");
+		
+		recipeService.delete(recipe);
 		// redirect to main page
 		return "redirect:/";
     }

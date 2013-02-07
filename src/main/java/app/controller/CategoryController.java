@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import app.domain.Category;
-import app.mongo.repository.CategoryRepository;
+import app.service.CategoryService;
 import app.util.AjaxUtils;
 import javax.validation.Valid;
 
@@ -19,9 +19,8 @@ import javax.validation.Valid;
 public class CategoryController {
 	protected static Logger logger = Logger.getLogger(CategoryController.class);
 	
-	// Auto wired fields before create object
 	@Autowired
-	private CategoryRepository categoryRepository;
+	CategoryService categoryService;
 	
 	// Invoked on every request
 	@ModelAttribute
@@ -32,14 +31,15 @@ public class CategoryController {
 	@RequestMapping(value = "/add-category")
     public String createCategory(Model model) {
 		logger.debug("Received request to show a page for create new category.");
-		// create new category
+		
 		model.addAttribute("category", new Category());
-		// show page for create category
+		// show jsp page
         return "category-modify";
     }
 	
 	@RequestMapping(value = "/add-category", method = RequestMethod.POST)
-    public String saveCategory(@Valid Category category, BindingResult result,
+    public String saveCategory(@Valid Category category, 
+    							BindingResult result,
     							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new category.");
 		
@@ -48,14 +48,7 @@ public class CategoryController {
 			return "category-modify";
 		}
 		
-		Category existCategory = categoryRepository.findByName(category.getName());
-		
-		if(existCategory == null) {
-			// save category
-			categoryRepository.save(category);
-		} else {
-			System.out.println("it exesits");
-		}
+		categoryService.save(category);
 		
 		// AJAX
 		if (ajaxRequest) {
@@ -68,43 +61,47 @@ public class CategoryController {
     }
 	
 	@RequestMapping(value = "/category/{id}")
-    public String showCategory(@PathVariable("id") String id, Model model) {
+    public String showCategory(@PathVariable("id") String id, 
+    							Model model) {
 		logger.debug("Recived request to find recipe and to show it on the page.");
-		// find category by id
-		Category category = categoryRepository.findOne(id);
-		// add category to model
+		
+		Category category = categoryService.get(id);
 		model.addAttribute(category);
-		// show recipe
+		// show jsp page
 		return "category";
     }
 	
 	@RequestMapping(value = "/category/{id}/edit")
-	public String editCategory(@PathVariable("id") String id, Model model) {
+	public String editCategory(@PathVariable("id") String id, 
+								Model model) {
 		logger.debug("Recived request to find category and to show page for modify.");
-		// find category by id
-		Category category = categoryRepository.findOne(id);
-		// add category to model
+		
+		Category category = categoryService.get(id);
 		model.addAttribute(category);
-		// show page for edit category
+		// show jsp page
 		return "category-modify";
     }
 	
 	@RequestMapping(value = "/category/{id}/edit", method = RequestMethod.POST)
-	public String updateCategory(@PathVariable("id") String id, Category category) {
-		logger.debug("Recived request to update existing category by id.");
-		// set id to new object
-		category.setId(id);
-		// update category from new object
-		categoryRepository.save(category);
-		// redirect to category page
-		return "redirect:/category/{id}";
+	public String updateCategory(@Valid Category category,
+								BindingResult result) {
+		logger.debug("Recived request to update existing category.");
+		
+		if (result.hasErrors()) {
+			System.out.println("has errors");
+			return "category-modify";
+		}
+		
+		categoryService.save(category);
+		// show jsp page
+		return "category";
     }
 	
 	@RequestMapping(value = "/category/{id}/delete")
 	public String deleteCategory(Category category) {
 		logger.debug("Recived request to delete category.");
-		// delete category
-		categoryRepository.delete(category);
+		
+		categoryService.delete(category);
 		// redirect to main page
 		return "redirect:/";
     }

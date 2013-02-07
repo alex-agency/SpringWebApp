@@ -12,19 +12,18 @@ import org.springframework.web.context.request.WebRequest;
 
 import app.domain.Category;
 import app.domain.Recipe;
-import app.mongo.repository.CategoryRepository;
-import app.mongo.repository.RecipeRepository;
+import app.service.CategoryService;
+import app.service.RecipeService;
 import app.util.AjaxUtils;
 
 @Controller
 public class MainController {
 	protected static Logger logger = Logger.getLogger(MainController.class);
 	
-	// Auto wired fields before create object
 	@Autowired
-	private RecipeRepository recipeRepository;
+	CategoryService categoryService;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	RecipeService recipeService;
 	
 	// Invoked on every request
 	@ModelAttribute
@@ -35,13 +34,13 @@ public class MainController {
 	@RequestMapping("/")
     public String showCookbook(Model model) {
 		logger.debug("Received request to show cookbook page with all categories and recipes.");
-		// get all categories which already has own recipes
-		List<Category> categories = categoryRepository.findAll();
+		// get all categories which already have own recipes
+		List<Category> categories = categoryService.getAll();
 		// add list of categories to model of cookbook
 		model.addAttribute("categories", categories);
 		
 		//----temp-----
-		List<Recipe> recipes = recipeRepository.findAll();
+		List<Recipe> recipes = recipeService.getAll();
 		model.addAttribute("recipes", recipes);
 		//----temp-----
 		
@@ -53,9 +52,9 @@ public class MainController {
 	public String clear() {
 		logger.debug("");
 		// delete all recipes
-		recipeRepository.deleteAll();
+		recipeService.deleteAll();
 		// delete all categories
-		categoryRepository.deleteAll();
+		categoryService.deleteAll();
 		// redirect to main page
 		return "redirect:/";
     }
