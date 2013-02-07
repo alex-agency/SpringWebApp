@@ -43,6 +43,10 @@ public class Category {
 	public void setRecipes(List<Recipe> recipes) {
 		this.recipes = recipes;
 	}
+	
+	public void putRecipe(Recipe recipe) {
+		this.recipes.add(recipe);
+	}
 
 	@Override
 	public String toString() {

@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -40,32 +41,42 @@ public class RecipeController {
 	@RequestMapping(value = "/add-recipe")
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
-		// recipe new category
+		// create new recipe
 		model.addAttribute("recipe", new Recipe());
+		// get all categories
+		List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("categories", categories);
 		// show page for create recipe
         return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
-    public String saveRecipe(@Valid Recipe recipe, Category category, BindingResult result,
+    public String saveRecipe(@Valid Recipe recipe, @Valid Category category, BindingResult result,
     							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new recipe.");
 		
+		System.out.println(recipe);
+		System.out.println(category);
+		
+		// show error
 		if (result.hasErrors()) {
 			System.out.println("has errors");
 			return "recipe-modify";
 		}
-		
+		// get recipe and category from db
 		Recipe existRecipe = recipeRepository.findByTitle(recipe.getTitle());
 		Category existCategory = categoryRepository.findByName(category.getName());
 		
-		if(existRecipe == null && existCategory == null) {
-			category.setRecipes(Arrays.asList(recipe));
-			// cascade save
-			categoryRepository.save(category);
+		if(existRecipe != null) {
+			// put existing
+			existCategory.putRecipe(existRecipe);
 		} else {
-			System.out.println("it exesits");
+			// put new recipe
+			existCategory.putRecipe(recipe);
 		}
+		
+		// cascade save
+		categoryRepository.save(category);
 		
 		// redirect to main page
         return "redirect:/";
