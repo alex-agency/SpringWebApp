@@ -16,16 +16,14 @@ public class CategoryService {
 	
 	public void save(Category category) {
 		
-		Category categoryDocument = categoryRepo.findByName(category.getName());
+		Category categoryDocument = categoryRepo.findByIdOrName(category.getId(), category.getName());
 		
 		if(categoryDocument != null) {
-			categoryDocument.setName(category.getName());
-			// update existing category
-			categoryRepo.save(categoryDocument);
-		} else {
-			// save new category
-			categoryRepo.save(category);
+			category.setId(categoryDocument.getId());
+			category.setRecipes(categoryDocument.getRecipes());
 		}
+		
+		categoryRepo.save(category);
 	}
 	
 	public List<Category> getAll() {
@@ -43,4 +41,5 @@ public class CategoryService {
 	public void deleteAll() {
 		categoryRepo.deleteAll();
 	}
+	
 }

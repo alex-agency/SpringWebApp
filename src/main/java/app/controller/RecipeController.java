@@ -1,7 +1,5 @@
 package app.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import app.domain.Category;
 import app.domain.Recipe;
 import app.service.CategoryService;
 import app.service.RecipeService;
@@ -40,23 +37,17 @@ public class RecipeController {
     public String createRecipe(Model model) {
 		logger.debug("Received request to show a page for create new recipe.");
 		
-		model.addAttribute("recipe", new Recipe());
-		model.addAttribute("category", new Category());
-		List<Category> categories = categoryService.getAll();
-		model.addAttribute("categories", categories);
+		model.addAttribute(new Recipe());
+		model.addAttribute("categories", categoryService.getAll());
 		// show jsp page
         return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/add-recipe", method = RequestMethod.POST)
-    public String saveRecipe(@Valid Recipe recipe, 
-    							@Valid Category category, 
+    public String saveRecipe(@Valid Recipe recipe,
     							BindingResult result,
     							@ModelAttribute("ajaxRequest") boolean ajaxRequest) {
 		logger.debug("Received request to save new recipe.");
-		
-		System.out.println(recipe);
-		System.out.println(category);
 		
 		if (result.hasErrors()) {
 			System.out.println("has errors");
@@ -64,8 +55,6 @@ public class RecipeController {
 		}
 		
 		recipeService.save(recipe);
-		categoryService.save(category);
-		
 		// redirect to main page
         return "redirect:/";
     }
@@ -75,8 +64,7 @@ public class RecipeController {
     							Model model) {
 		logger.debug("Recived request to find recipe and to show it on the page.");
 		
-		Recipe recipe = recipeService.get(id);
-		model.addAttribute(recipe);
+		model.addAttribute(recipeService.get(id));
 		// show jsp page
 		return "recipe";
     }
@@ -86,15 +74,14 @@ public class RecipeController {
 								Model model) {
 		logger.debug("Recived request to find recipe and to show page for modify.");
 		
-		Recipe recipe = recipeService.get(id);
-		model.addAttribute(recipe);
+		model.addAttribute(recipeService.get(id));
+		model.addAttribute("categories", categoryService.getAll());
 		// show jsp page
 		return "recipe-modify";
     }
 	
 	@RequestMapping(value = "/recipe/{id}/edit", method = RequestMethod.POST)
 	public String updateRecipe(@Valid Recipe recipe,
-								@Valid Category category,
 								BindingResult result) {
 		logger.debug("Recived request to find recipe and to show page for modify.");
 		
@@ -104,8 +91,6 @@ public class RecipeController {
 		}
 		
 		recipeService.save(recipe);
-		categoryService.save(category);
-		
 		// show jsp page
 		return "recipe";
     }

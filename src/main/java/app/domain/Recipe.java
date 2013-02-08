@@ -11,6 +11,8 @@ public class Recipe {
 	private String id;
 	@NotEmpty
 	private String title;
+	@NotEmpty
+	private String category;
 	private String ingredients;
 	private String body;
 	
@@ -28,6 +30,14 @@ public class Recipe {
 	
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	public String getIngredients() {
@@ -48,51 +58,9 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", title=" + title + ", ingredients="
-				+ ingredients + ", body=" + body + "]";
+		return "Recipe [id=" + id + ", title=" + title + ", category="
+				+ category + ", ingredients=" + ingredients + ", body=" + body
+				+ "]";
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((body == null) ? 0 : body.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((ingredients == null) ? 0 : ingredients.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Recipe other = (Recipe) obj;
-		if (body == null) {
-			if (other.body != null)
-				return false;
-		} else if (!body.equals(other.body))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (ingredients == null) {
-			if (other.ingredients != null)
-				return false;
-		} else if (!ingredients.equals(other.ingredients))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
+	
 }

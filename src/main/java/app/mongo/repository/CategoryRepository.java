@@ -7,7 +7,7 @@ import app.domain.Category;
 
 public interface CategoryRepository extends MongoRepository<Category, String> {
 	
-	public Category findByName(String name);
+	public Category findByIdOrName(String Id, String name);
 	
 	public List<Category> findByNameLike(String name);
 }

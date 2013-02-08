@@ -1,7 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form:form id="form" method="post" modelAttribute="recipe" class="form-horizontal">
+<form:form method="post" modelAttribute="recipe" class="form-horizontal">
 	<fieldset><legend>Recipe info</legend>
 		<div class="control-group">
 			<form:label class="control-label" path="title">Title</form:label>
@@ -13,15 +12,11 @@
 		<div class="control-group">
 			<label class="control-label" path="category">Category</label>
 			<div class="controls">
-				<%-- <select name="category">
-   					<c:forEach items="${categories}" var="category">
-       					<option value="${category.name}">${category.name}</option>
-   					</c:forEach>
-				</select> --%>
-					<form:select modelAttribute="category" path="category.name">
-	    				<form:option value="" label="-- Choose one--" />
-	    				<form:options items="${categories}" itemValue="id" itemLabel="name" />
-					</form:select>
+				<form:select path="category">
+	    			<form:option value="" label="-- Choose one--" />
+	    			<form:options items="${categories}" itemValue="id" itemLabel="name" />
+				</form:select>
+				<span class="help-inline"><form:errors path="category"/></span>
 			</div>
 		</div>
 		<div class="control-group">

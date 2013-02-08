@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface RecipeRepository extends MongoRepository<Recipe, String> {
 	
-	public Recipe findByTitle(String title);
+	public Recipe findByIdOrTitle(String id, String title);
 	
 	public List<Recipe> findByTitleLike(String title);
 }

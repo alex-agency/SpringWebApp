@@ -32,7 +32,7 @@ public class CategoryController {
     public String createCategory(Model model) {
 		logger.debug("Received request to show a page for create new category.");
 		
-		model.addAttribute("category", new Category());
+		model.addAttribute(new Category());
 		// show jsp page
         return "category-modify";
     }
@@ -49,13 +49,11 @@ public class CategoryController {
 		}
 		
 		categoryService.save(category);
-		
 		// AJAX
 		if (ajaxRequest) {
 			System.out.println("AJAX request");
 			return null;
 		}
-		
 		// redirect to main page
         return "redirect:/";
     }
@@ -65,8 +63,7 @@ public class CategoryController {
     							Model model) {
 		logger.debug("Recived request to find recipe and to show it on the page.");
 		
-		Category category = categoryService.get(id);
-		model.addAttribute(category);
+		model.addAttribute(categoryService.get(id));
 		// show jsp page
 		return "category";
     }
@@ -76,8 +73,7 @@ public class CategoryController {
 								Model model) {
 		logger.debug("Recived request to find category and to show page for modify.");
 		
-		Category category = categoryService.get(id);
-		model.addAttribute(category);
+		model.addAttribute(categoryService.get(id));
 		// show jsp page
 		return "category-modify";
     }
