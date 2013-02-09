@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.domain.Category;
 import app.domain.Recipe;
-import app.mongo.repository.CategoryRepository;
 import app.mongo.repository.RecipeRepository;
 
 @Service
@@ -16,28 +14,25 @@ public class RecipeService {
 	@Autowired
 	private RecipeRepository recipeRepo;
 	@Autowired
-	private CategoryRepository categoryRepo;
+	private CategoryService categoryService;
 	
 	public void save(Recipe recipe) {
 		
 		Recipe recipeDocument = recipeRepo.findByIdOrTitle(recipe.getId(), recipe.getTitle());
-		
 		if(recipeDocument != null) {
-			recipe.setId(recipeDocument.getId());
 			
-			System.out.println("Nothing");
-			
-		} else {
-			Category categoryDocument = categoryRepo.findOne(recipe.getCategory());
-			List<Recipe> recipes = categoryDocument.getRecipes();
-			recipes.add(recipe);
-			categoryDocument.setRecipes(recipes);
-			
-			// cascade save
-			categoryRepo.save(categoryDocument);
+			if(recipe.getCategory().equals(recipeDocument.getCategory())) {
+				// update existing
+				recipe.setId(recipeDocument.getId());
+				recipeRepo.save(recipe);
+				return;
+			} else {
+				// delete old
+				this.delete(recipeDocument);
+			}
 		}
-
-		
+		// save new
+		categoryService.putRecipe(recipe.getCategory(), recipe);
 	}
 	
 	public List<Recipe> getAll() {
@@ -49,6 +44,7 @@ public class RecipeService {
 	}
 	
 	public void delete(Recipe recipe) {
+		categoryService.deleteRecipe(recipe.getCategory(), recipe);
 		recipeRepo.delete(recipe);
 	}
 	
