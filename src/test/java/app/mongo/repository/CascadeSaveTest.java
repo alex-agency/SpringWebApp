@@ -2,8 +2,7 @@ package app.mongo.repository;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +18,14 @@ import app.domain.Recipe;
 public class CascadeSaveTest {
     
 	@Autowired
-	private RecipeRepository recipeRepository;
+	private RecipeRepository recipeRepo;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private CategoryRepository categoryRepo;
     
     @Before
     public void clear() {
-    	recipeRepository.deleteAll();
-    	categoryRepository.deleteAll();
+    	recipeRepo.deleteAll();
+    	categoryRepo.deleteAll();
     }
     
     @Test
@@ -34,27 +33,40 @@ public class CascadeSaveTest {
     {
     	// CREATE
     	
-    	Category testCategory = new Category();
-    	testCategory.setName("category.name");
-    	Recipe testRecipe1 = new Recipe();
-    	testRecipe1.setTitle("recipe1.title");
-    	Recipe testRecipe2 = new Recipe();
-    	testRecipe2.setTitle("recipe2.title");
+    	Category categoryTest = new Category();
+    	categoryTest.setName("category.name");
     	
-    	testCategory.setRecipes(Arrays.asList(testRecipe1, testRecipe2));
+    	categoryRepo.save(categoryTest);
+    	
+    	Recipe recipeTest1 = new Recipe();
+    	recipeTest1.setTitle("recipe1.title");
+    	recipeTest1.setCategory(categoryTest.getId());
+    	
+    	Recipe recipeTest2 = new Recipe();
+    	recipeTest2.setTitle("recipe2.title");
+    	recipeTest2.setCategory(categoryTest.getId());
+    	
+    	Set<Recipe> recipesCategory = categoryTest.getRecipes();
+    	recipesCategory.add(recipeTest1);
+    	recipesCategory.add(recipeTest2);
+    	
+    	categoryTest.setRecipes(recipesCategory);
     	
     	// cascade save
-    	categoryRepository.save(testCategory);
+    	categoryRepo.save(categoryTest);
     	
     	// READ
     	
-    	Category mongoCategory = categoryRepository.findOne(testCategory.getId());
+    	Category categoryDoc = categoryRepo.findByIdOrName(null, categoryTest.getName());
     	
-    	List<Recipe> categoryRecipeList = mongoCategory.getRecipes();
+    	assertNotNull(categoryDoc);
+
+    	Recipe recipeDoc1 = recipeRepo.findByIdOrTitle(null, recipeTest1.getTitle());
     	
-    	assertFalse(categoryRecipeList.isEmpty());
-    	assertTrue(categoryRecipeList.contains(testRecipe1));
-    	assertTrue(categoryRecipeList.contains(testRecipe2));
+    	assertNotNull(recipeDoc1);
     	
+    	Recipe recipeDoc2 = recipeRepo.findByIdOrTitle(null, recipeTest2.getTitle());
+    	
+    	assertNotNull(recipeDoc2);
     }
 }

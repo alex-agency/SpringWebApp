@@ -1,7 +1,6 @@
 package app.mongo.repository;
 
 import java.util.List;
-
 import app.domain.Recipe;
 
 import org.springframework.data.mongodb.repository.MongoRepository;

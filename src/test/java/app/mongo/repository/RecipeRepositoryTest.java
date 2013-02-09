@@ -3,7 +3,6 @@ package app.mongo.repository;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +17,11 @@ import app.domain.Recipe;
 public class RecipeRepositoryTest {
 	
 	@Autowired
-	private RecipeRepository recipeRepository;
+	private RecipeRepository recipeRepo;
 	
 	@Before
 	public void clear() {
-		recipeRepository.deleteAll();
+		recipeRepo.deleteAll();
 	}
 	
 	@Test
@@ -30,40 +29,43 @@ public class RecipeRepositoryTest {
 		
 		// CREATE
 		
-		Recipe testRecipe = new Recipe();
-		testRecipe.setTitle("recipe.title");
-		testRecipe.setIngredients("recipe.ingredients");
-		testRecipe.setBody("recipe.body");
+		Recipe recipeTest = new Recipe();
+		recipeTest.setTitle("recipe.title");
+		recipeTest.setCategory("category.id");
+		recipeTest.setIngredients("recipe.ingredients");
+		recipeTest.setBody("recipe.body");
 		
-		recipeRepository.save(testRecipe);
+		recipeRepo.save(recipeTest);
 		
 		// READ
 		
-		List<Recipe> mongoRecipeList = recipeRepository.findByTitleLike(testRecipe.getTitle());
+		List<Recipe> recipesDocs = recipeRepo.findByTitleLike(recipeTest.getTitle());
 		
-		assertNotNull(mongoRecipeList);
-		assertFalse(mongoRecipeList.isEmpty());
-		assertTrue(mongoRecipeList.contains(testRecipe));
+		assertNotNull(recipesDocs);
+		assertFalse(recipesDocs.isEmpty());
+		assertTrue(recipesDocs.contains(recipeTest));
 		
-		Recipe mongoRecipe = mongoRecipeList.get(mongoRecipeList.indexOf(testRecipe));
+		Recipe recipeDoc = recipeRepo.findByIdOrTitle(null, recipeTest.getTitle());
 		
-		assertNotNull(mongoRecipe.getId());
+		assertNotNull(recipeDoc);
+		assertNotNull(recipeDoc.getId());
+		assertEquals(recipeDoc, recipeTest);
 		
 		// UPDATE
 		
-		Recipe newRecipe = new Recipe();
-		newRecipe.setTitle("new title");
-		newRecipe.setId(mongoRecipe.getId());
+		Recipe recipeNew = new Recipe();
+		recipeNew.setTitle("new title");
+		recipeNew.setId(recipeDoc.getId());
 		
-		recipeRepository.save(newRecipe);
+		recipeRepo.save(recipeNew);
 		
-		Recipe mongoRecipeUpdated = recipeRepository.findOne(mongoRecipe.getId());
+		Recipe recipeDocUpdated = recipeRepo.findOne(recipeDoc.getId());
 		
-		assertEquals(mongoRecipeUpdated, newRecipe);
+		assertEquals(recipeDocUpdated, recipeNew);
 		
 		// DELETE
 		
-		recipeRepository.delete(mongoRecipeUpdated);
-		assertTrue(recipeRepository.count() == 0);
+		recipeRepo.delete(recipeDocUpdated);
+		assertTrue(recipeRepo.count() == 0);
     }
 }

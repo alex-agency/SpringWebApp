@@ -1,7 +1,7 @@
 package app.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -19,7 +19,7 @@ public class Category {
 	private String name;	
 	@DBRef
     @CascadeSave
-	private List<Recipe> recipes = new ArrayList<Recipe>();
+	private Set<Recipe> recipes = new HashSet<Recipe>();
 	
 	public String getId() {
 		return id;
@@ -37,11 +37,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<Recipe> getRecipes() {
+	public Set<Recipe> getRecipes() {
 		return recipes;
 	}
 
-	public void setRecipes(List<Recipe> recipes) {
+	public void setRecipes(Set<Recipe> recipes) {
 		this.recipes = recipes;
 	}
 	

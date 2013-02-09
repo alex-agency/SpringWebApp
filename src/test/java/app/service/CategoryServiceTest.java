@@ -1,8 +1,9 @@
-package app.mongo.repository;
+package app.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,38 +15,31 @@ import app.domain.Category;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/mongo-repositories-test-context.xml")
-public class CategoryRepositoryTest {
+public class CategoryServiceTest {
 	
 	@Autowired
-	private CategoryRepository categoryRepo;
+	private CategoryService categoryService;
 	
 	@Before
 	public void clear() {
-		categoryRepo.deleteAll();
+		categoryService.deleteAll();
 	}
 	
 	@Test
-    public void grudTest() {
+    public void grudTest() throws Exception {
 		
 		// CREATE
 		
 		Category categoryTest = new Category();
 		categoryTest.setName("category.name");
 		
-		categoryRepo.save(categoryTest);
+		categoryService.create(categoryTest);
 		
 		// READ
 		
-		List<Category> categoriesDocs = categoryRepo.findByNameLike(categoryTest.getName());
-		
-		assertNotNull(categoriesDocs);
-		assertFalse(categoriesDocs.isEmpty());
-		assertTrue(categoriesDocs.contains(categoryTest));
-		
-		Category categoryDoc = categoryRepo.findByIdOrName(null, categoryTest.getName());
+		Category categoryDoc = categoryService.read(categoryTest.getId());
 		
 		assertNotNull(categoryDoc);
-		assertNotNull(categoryDoc.getId());
 		assertEquals(categoryDoc, categoryTest);
 		
 		// UPDATE
@@ -54,15 +48,16 @@ public class CategoryRepositoryTest {
 		categoryNew.setName("New name");
 		categoryNew.setId(categoryDoc.getId());
 		
-		categoryRepo.save(categoryNew);
+		categoryService.update(categoryNew);
 		
-		Category categoryDocUpdated = categoryRepo.findOne(categoryDoc.getId());
+		Category categoryDocUpdated = categoryService.read(categoryDoc.getId());
 		
 		assertEquals(categoryDocUpdated, categoryNew);
 		
 		// DELETE
 		
-		categoryRepo.delete(categoryDocUpdated);
-		assertTrue(categoryRepo.count() == 0);
-    }
+		categoryService.delete(categoryDocUpdated);
+		assertTrue(categoryService.readAll().isEmpty());
+	}
+
 }
