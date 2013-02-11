@@ -31,11 +31,7 @@ public class MainController {
     public String showCookbook(Model model) {
 		logger.debug("Received request to show cookbook page with all categories and recipes.");
 		
-		model.addAttribute("categories", categoryService.getAll());
-		
-		//----temp-----
-		model.addAttribute("recipes", recipeService.getAll());
-		//----temp-----
+		model.addAttribute("categories", categoryService.readAll());
 		
 		// show main page
         return "cookbook";

@@ -20,9 +20,3 @@
 		</ul>
 	</section>
 </c:forEach>
-
-<ul class="thumbnails">
-	<c:forEach var="recipe" items="${recipes}">
-		<li><a class="thumbnail" href="/recipe/${recipe.id}">${recipe}</a></li>
-	</c:forEach>
-</ul>
